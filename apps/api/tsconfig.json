@@ -5,6 +5,12 @@
     "moduleResolution": "node",
     "outDir": "./dist",
     "rootDir": "./src",
+    "baseUrl": "./src",
+    "paths": {
+      "@domain/*": ["domain/*"],
+      "@application/*": ["application/*"],
+      "@infrastructure/*": ["infrastructure/*"]
+    },
     "target": "ES2022",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,

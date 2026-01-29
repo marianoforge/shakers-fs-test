@@ -37,6 +37,24 @@ module.exports = {
           'object',
           'type',
         ],
+        pathGroups: [
+          {
+            pattern: '@domain/**',
+            group: 'internal',
+            position: 'before',
+          },
+          {
+            pattern: '@application/**',
+            group: 'internal',
+            position: 'before',
+          },
+          {
+            pattern: '@infrastructure/**',
+            group: 'internal',
+            position: 'before',
+          },
+        ],
+        pathGroupsExcludedImportTypes: ['builtin'],
         'newlines-between': 'always',
         alphabetize: { order: 'asc', caseInsensitive: true },
       },
@@ -50,7 +68,7 @@ module.exports = {
     'import/resolver': {
       typescript: {
         alwaysTryTypes: true,
-        project: ['./tsconfig.base.json', './packages/*/tsconfig.json'],
+        project: ['./tsconfig.base.json', './apps/*/tsconfig.json', './packages/*/tsconfig.json'],
       },
       node: true,
     },
