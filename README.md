@@ -32,29 +32,62 @@ shakers/
 - Node.js >= 20.0.0
 - pnpm >= 9.0.0
 
-## Instalación
+## Inicio Rápido
 
 ```bash
+# 1. Instalar dependencias
 pnpm install
+
+# 2. Configurar variables de entorno
+cp apps/api/.env.example apps/api/.env
+
+# 3. Iniciar API (puerto 3001)
+pnpm --filter @shakers/api dev
+
+# 4. Iniciar Web (puerto 3000) - en otra terminal
+pnpm --filter @shakers/web dev
+
+# O iniciar ambos en paralelo
+pnpm dev
+```
+
+### URLs
+
+| Servicio     | URL                          |
+| ------------ | ---------------------------- |
+| API          | http://localhost:3001        |
+| Web          | http://localhost:3000        |
+| Health Check | http://localhost:3001/health |
+
+## Variables de Entorno
+
+### API (`apps/api/.env`)
+
+```env
+PORT=3001
+CORS_ORIGIN=http://localhost:3000
 ```
 
 ## Scripts Disponibles
 
 ```bash
 # Desarrollo
-pnpm dev              # Inicia todos los servicios en modo desarrollo
+pnpm dev                          # Inicia todos los servicios
+pnpm --filter @shakers/api dev    # Solo API
+pnpm --filter @shakers/web dev    # Solo Web
 
 # Build
-pnpm build            # Construye todos los paquetes
+pnpm build                        # Construye todos los paquetes
+pnpm --filter @shakers/api build  # Solo API
 
 # Linting y formato
-pnpm lint             # Ejecuta ESLint
-pnpm lint:fix         # Corrige errores de ESLint
-pnpm format           # Formatea código con Prettier
-pnpm format:check     # Verifica formato
+pnpm lint                         # Ejecuta ESLint
+pnpm lint:fix                     # Corrige errores de ESLint
+pnpm format                       # Formatea código con Prettier
+pnpm format:check                 # Verifica formato
 
 # Type checking
-pnpm typecheck        # Verifica tipos en todos los paquetes
+pnpm typecheck                    # Verifica tipos en todos los paquetes
 ```
 
 ## Convención de Commits
