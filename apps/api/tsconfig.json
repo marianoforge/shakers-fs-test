@@ -3,13 +3,16 @@
   "compilerOptions": {
     "module": "CommonJS",
     "moduleResolution": "node",
+    "skipLibCheck": true,
     "outDir": "./dist",
     "rootDir": "./src",
     "baseUrl": "./src",
     "paths": {
       "@domain/*": ["domain/*"],
       "@application/*": ["application/*"],
-      "@infrastructure/*": ["infrastructure/*"]
+      "@infrastructure/*": ["infrastructure/*"],
+      "@shakers/shared": ["../../packages/shared/dist/index"],
+      "@shakers/shared/*": ["../../packages/shared/dist/*"]
     },
     "target": "ES2022",
     "emitDecoratorMetadata": true,

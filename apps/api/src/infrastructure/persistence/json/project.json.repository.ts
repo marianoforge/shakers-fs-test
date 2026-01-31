@@ -2,7 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 
 import { Injectable } from '@nestjs/common';
-import { Project, ProjectFilter } from '@shakers/shared';
+import { Position, Project, ProjectFilter } from '@shakers/shared';
 
 import { ProjectRepositoryPort } from '@domain/ports';
 
@@ -25,16 +25,16 @@ export class ProjectJsonRepository implements ProjectRepositoryPort {
 
     if (filter?.specialties?.length) {
       result = result.filter((project) =>
-        project.positions.some((position) =>
-          position.specialties.some((s) => filter.specialties?.includes(s)),
+        project.positions.some((position: Position) =>
+          position.specialties.some((s: number) => filter.specialties?.includes(s)),
         ),
       );
     }
 
     if (filter?.skills?.length) {
       result = result.filter((project) =>
-        project.positions.some((position) =>
-          position.skills.some((s) => filter.skills?.includes(s)),
+        project.positions.some((position: Position) =>
+          position.skills.some((s: number) => filter.skills?.includes(s)),
         ),
       );
     }

@@ -14,68 +14,51 @@ export const theme = createTheme({
       contrastText: palette.white,
     },
     secondary: {
-      main: palette.grey[8],
+      main: palette.grey[9],
       light: palette.grey[6],
       dark: palette.grey[9],
       contrastText: palette.white,
     },
     error: {
-      main: palette.red[8],
-      light: palette.red[4],
-      dark: palette.red[8],
+      main: palette.text.red8,
       contrastText: palette.white,
     },
     background: {
-      default: palette.surface.grey0,
+      default: palette.white,
       paper: palette.white,
     },
     text: {
       primary: palette.text.grey9,
       secondary: palette.text.grey6,
     },
-    grey: {
-      50: palette.grey[0],
-      100: palette.grey[2],
-      200: palette.grey[4],
-      400: palette.grey[6],
-      600: palette.grey[8],
-      800: palette.grey[9],
-    },
     divider: palette.grey[4],
   },
   typography: {
-    fontFamily: '"Inter", "Roboto", "Helvetica", "Arial", sans-serif',
+    fontFamily: '"Inter", "GT Planar", "Roboto", "Helvetica", "Arial", sans-serif',
     h1: {
-      fontSize: '2rem',
-      fontWeight: 700,
-      lineHeight: 1.2,
+      fontSize: '1.125rem',
+      fontWeight: 400,
+      lineHeight: 1.44,
     },
     h2: {
-      fontSize: '1.5rem',
-      fontWeight: 600,
-      lineHeight: 1.3,
-    },
-    h3: {
-      fontSize: '1.25rem',
-      fontWeight: 600,
-      lineHeight: 1.4,
-    },
-    h4: {
       fontSize: '1.125rem',
-      fontWeight: 600,
-      lineHeight: 1.4,
+      fontWeight: 400,
+      lineHeight: 1.44,
     },
     body1: {
-      fontSize: '1rem',
-      lineHeight: 1.5,
+      fontSize: '0.875rem',
+      fontWeight: 400,
+      lineHeight: 1.43,
     },
     body2: {
-      fontSize: '0.875rem',
-      lineHeight: 1.5,
+      fontSize: '0.75rem',
+      fontWeight: 400,
+      lineHeight: 1.33,
     },
     caption: {
       fontSize: '0.75rem',
-      lineHeight: 1.5,
+      fontWeight: 400,
+      lineHeight: 1.33,
     },
   },
   shape: {
@@ -86,29 +69,18 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           textTransform: 'none',
-          fontWeight: 600,
-          borderRadius: 8,
-          padding: '10px 24px',
-        },
-        contained: {
-          boxShadow: 'none',
-          '&:hover': {
-            boxShadow: 'none',
-          },
-        },
-        outlined: {
-          borderWidth: 2,
-          '&:hover': {
-            borderWidth: 2,
-          },
+          fontWeight: 400,
+          borderRadius: 6,
+          fontSize: '0.75rem',
+          padding: '6px 8px',
         },
       },
     },
     MuiCard: {
       styleOverrides: {
         root: {
-          borderRadius: 12,
-          boxShadow: '0px 1px 3px rgba(0, 0, 0, 0.08)',
+          borderRadius: 8,
+          boxShadow: 'none',
           border: `1px solid ${palette.grey[4]}`,
         },
       },
@@ -117,27 +89,9 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           borderRadius: 6,
-          fontWeight: 500,
-        },
-        filled: {
-          backgroundColor: palette.surface.green2,
-          color: palette.text.green8,
-        },
-      },
-    },
-    MuiDialog: {
-      styleOverrides: {
-        paper: {
-          borderRadius: 16,
-        },
-      },
-    },
-    MuiTextField: {
-      styleOverrides: {
-        root: {
-          '& .MuiOutlinedInput-root': {
-            borderRadius: 8,
-          },
+          fontWeight: 400,
+          fontSize: '0.75rem',
+          height: 28,
         },
       },
     },

@@ -1,57 +1,55 @@
 'use client';
 
+import Image from 'next/image';
 import Link from 'next/link';
 
-import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 
 export function Header() {
   return (
-    <AppBar
-      position="sticky"
-      elevation={0}
+    <Box
+      component="header"
       sx={{
-        bgcolor: 'background.paper',
-        borderBottom: 1,
-        borderColor: 'divider',
+        bgcolor: 'white',
+        borderBottom: '1px solid',
+        borderColor: '#E4E7E7',
+        py: 2.5,
+        px: 5,
       }}
     >
-      <Container maxWidth="lg">
-        <Toolbar disableGutters sx={{ minHeight: { xs: 64 } }}>
-          <Link href="/projects" style={{ textDecoration: 'none' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-              <Box
-                sx={{
-                  width: 32,
-                  height: 32,
-                  borderRadius: 1,
-                  bgcolor: 'primary.main',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}
-              >
-                <Typography variant="body2" sx={{ color: 'white', fontWeight: 700 }}>
-                  S
-                </Typography>
-              </Box>
-              <Typography
-                variant="h6"
-                sx={{
-                  color: 'text.primary',
-                  fontWeight: 700,
-                  letterSpacing: '-0.02em',
-                }}
-              >
-                Shakers
-              </Typography>
-            </Box>
-          </Link>
-        </Toolbar>
-      </Container>
-    </AppBar>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+        }}
+      >
+        <Link href="/projects" style={{ textDecoration: 'none' }}>
+          <Typography
+            sx={{
+              color: '#0D0D0D',
+              fontSize: 18,
+              fontWeight: 400,
+              lineHeight: '26px',
+            }}
+          >
+            Buscar Proyectos
+          </Typography>
+        </Link>
+
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+          <Image src="/icons/chat.svg" alt="Chat" width={18} height={18} />
+          <Image src="/icons/bell.svg" alt="Notificaciones" width={18} height={18} />
+          <Image
+            src="/images/avatar.png"
+            alt="Avatar"
+            width={24}
+            height={24}
+            style={{ borderRadius: 4 }}
+          />
+        </Box>
+      </Box>
+    </Box>
   );
 }

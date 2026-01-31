@@ -1,33 +1,41 @@
+'use client';
+
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
-import Typography from '@mui/material/Typography';
+import Stack from '@mui/material/Stack';
+
+import { ProjectCard, ProjectsHeader, ReferralBanner } from '@/components/projects';
+import { mockProjects } from '@/mocks';
 
 export default function ProjectsPage() {
   return (
-    <Container maxWidth="lg" sx={{ py: 4 }}>
-      <Box sx={{ mb: 4 }}>
-        <Typography variant="h1" component="h1" sx={{ mb: 1 }}>
-          Buscar Proyectos
-        </Typography>
-        <Typography variant="body1" color="text.secondary">
-          Encuentra proyectos que se ajusten a tus habilidades y experiencia
-        </Typography>
-      </Box>
+    <Box
+      sx={{
+        px: 5,
+        py: 5,
+        bgcolor: 'white',
+        minHeight: 'calc(100vh - 65px)',
+      }}
+    >
+      <ProjectsHeader />
 
-      <Box
-        sx={{
-          p: 4,
-          bgcolor: 'background.paper',
-          borderRadius: 2,
-          border: 1,
-          borderColor: 'divider',
-          textAlign: 'center',
-        }}
-      >
-        <Typography variant="body1" color="text.secondary">
-          Cargando proyectos...
-        </Typography>
+      <Box sx={{ mt: 5 }}>
+        <ReferralBanner />
+
+        <Stack spacing={5}>
+          {mockProjects.map((project) => (
+            <ProjectCard
+              key={project.id}
+              id={project.id}
+              title={project.title}
+              organization={project.organization}
+              category={project.category}
+              subcategory={project.subcategory}
+              budget={project.budget}
+              skills={project.skills}
+            />
+          ))}
+        </Stack>
       </Box>
-    </Container>
+    </Box>
   );
 }
