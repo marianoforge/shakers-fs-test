@@ -1,10 +1,16 @@
 'use client';
 
+import { useState } from 'react';
+
 import Image from 'next/image';
 import Link from 'next/link';
 
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
+
+import { formatCurrency, formatHourlyRate, getSkillIcon } from '@/lib/utils';
+
+const FALLBACK_LOGO = '/logos/logos_brand.png';
 
 interface ProjectCardProps {
   id: number;
@@ -32,12 +38,18 @@ export function ProjectCard({
   budget,
   skills,
 }: ProjectCardProps) {
+  const [logoSrc, setLogoSrc] = useState(organization.logo || FALLBACK_LOGO);
+
+  const handleImageError = () => {
+    setLogoSrc(FALLBACK_LOGO);
+  };
+
   const formatBudget = () => {
     if (budget.hourFrom && budget.hourTo) {
-      return `${budget.hourFrom} - ${budget.hourTo} €/h`;
+      return formatHourlyRate(budget.hourFrom, budget.hourTo);
     }
     if (budget.total) {
-      return `${budget.total.toLocaleString('es-ES')}€`;
+      return formatCurrency(budget.total);
     }
     return null;
   };
@@ -93,10 +105,12 @@ export function ProjectCard({
             }}
           >
             <Image
-              src={organization.logo}
+              src={logoSrc}
               alt={organization.name}
               width={82}
               height={82}
+              onError={handleImageError}
+              unoptimized
               style={{
                 borderRadius: '6px',
                 objectFit: 'cover',
@@ -104,12 +118,17 @@ export function ProjectCard({
             />
             <Typography
               sx={{
-                alignSelf: 'stretch',
+                width: 82,
                 textAlign: 'center',
                 color: '#AEB7B4',
                 fontSize: 12,
                 fontWeight: 400,
                 lineHeight: '16px',
+                wordBreak: 'break-word',
+                display: '-webkit-box',
+                WebkitLineClamp: 2,
+                WebkitBoxOrient: 'vertical',
+                overflow: 'hidden',
               }}
             >
               {organization.name}
@@ -185,27 +204,8 @@ export function ProjectCard({
                 </Typography>
               )}
               {budgetText && (
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
-                  <Box
-                    sx={{
-                      width: 16,
-                      height: 16,
-                      position: 'relative',
-                      overflow: 'hidden',
-                    }}
-                  >
-                    <Box
-                      sx={{
-                        width: 8.13,
-                        height: 9.33,
-                        position: 'absolute',
-                        left: 3.33,
-                        top: 3.33,
-                        outline: '1px solid #6FBEB0',
-                        outlineOffset: '-0.5px',
-                      }}
-                    />
-                  </Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                  <Image src="/icons/currency-euro.svg" alt="€" width={16} height={16} />
                   <Typography
                     sx={{
                       color: '#0B5A4C',
@@ -230,32 +230,44 @@ export function ProjectCard({
                 flexWrap: 'wrap',
               }}
             >
-              {skills.map((skill) => (
-                <Box
-                  key={skill}
-                  sx={{
-                    px: 1,
-                    py: 0.75,
-                    background: '#F4F5F5',
-                    borderRadius: '6px',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    gap: 0.75,
-                  }}
-                >
-                  <Typography
+              {skills.map((skill) => {
+                const skillIcon = getSkillIcon(skill);
+                return (
+                  <Box
+                    key={skill}
                     sx={{
-                      color: '#181B1A',
-                      fontSize: 12,
-                      fontWeight: 400,
-                      lineHeight: '16px',
+                      px: 1,
+                      py: 0.75,
+                      background: '#F4F5F5',
+                      borderRadius: '6px',
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      gap: 0.75,
                     }}
                   >
-                    {skill}
-                  </Typography>
-                </Box>
-              ))}
+                    {skillIcon && (
+                      <Image
+                        src={skillIcon}
+                        alt={skill}
+                        width={16}
+                        height={16}
+                        style={{ borderRadius: '2px' }}
+                      />
+                    )}
+                    <Typography
+                      sx={{
+                        color: '#181B1A',
+                        fontSize: 12,
+                        fontWeight: 400,
+                        lineHeight: '16px',
+                      }}
+                    >
+                      {skill}
+                    </Typography>
+                  </Box>
+                );
+              })}
             </Box>
           </Box>
         </Box>
