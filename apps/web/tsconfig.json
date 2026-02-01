@@ -10,6 +10,7 @@
     "incremental": true,
     "declaration": false,
     "declarationMap": false,
+    "exactOptionalPropertyTypes": false,
     "plugins": [
       {
         "name": "next"

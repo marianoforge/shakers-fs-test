@@ -5,21 +5,31 @@ import { useMemo } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 
-import { FiltersModal, ProjectCard, ProjectsHeader, ReferralBanner } from '@/components/projects';
+import {
+  AppliedFilters,
+  FiltersModal,
+  ProjectCard,
+  ProjectsHeader,
+  ReferralBanner,
+} from '@/components/projects';
 import { EmptyState, ErrorState, LoadingState } from '@/components/ui';
 import { useFilters, useProjects, useStaticData } from '@/hooks';
 import { createIdResolver } from '@/lib/utils';
 
 export default function ProjectsPage() {
   const {
+    filters,
     tempFilters,
     isModalOpen,
+    hasActiveFilters,
     openModal,
     closeModal,
     applyFilters,
     clearFilters,
+    clearAllFilters,
     updateTempFilter,
     toggleOperator,
+    removeFilter,
     getProjectFilter,
   } = useFilters();
 
@@ -51,7 +61,16 @@ export default function ProjectsPage() {
         staticData={staticData}
       />
 
-      <Box sx={{ mt: 5 }}>
+      {hasActiveFilters && (
+        <AppliedFilters
+          filters={filters}
+          staticData={staticData}
+          onRemoveFilter={removeFilter}
+          onClearAll={clearAllFilters}
+        />
+      )}
+
+      <Box sx={{ mt: hasActiveFilters ? 2 : 5 }}>
         <ReferralBanner />
 
         {isLoading && <LoadingState message="Cargando proyectos..." />}

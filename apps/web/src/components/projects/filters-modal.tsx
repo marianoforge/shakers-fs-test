@@ -1,6 +1,6 @@
 'use client';
 
-import { SortOrder, StaticData } from '@shakers/shared';
+import { StaticData } from '@shakers/shared';
 
 import CloseIcon from '@mui/icons-material/Close';
 import Autocomplete from '@mui/material/Autocomplete';
@@ -365,7 +365,7 @@ export function FiltersModal({
             >
               <Radio
                 checked={filters.order === 'publishedAt_desc'}
-                onChange={() => onFilterChange('order', 'publishedAt_desc' as SortOrder)}
+                onChange={() => onFilterChange('order', 'publishedAt_desc')}
                 sx={{
                   p: 0,
                   width: 20,
@@ -391,7 +391,7 @@ export function FiltersModal({
             >
               <Radio
                 checked={filters.order === 'publishedAt_asc'}
-                onChange={() => onFilterChange('order', 'publishedAt_asc' as SortOrder)}
+                onChange={() => onFilterChange('order', 'publishedAt_asc')}
                 sx={{
                   p: 0,
                   width: 20,

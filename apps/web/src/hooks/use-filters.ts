@@ -2,7 +2,9 @@
 
 import { useCallback, useState } from 'react';
 
-import { ProjectFilter, SortOrder } from '@shakers/shared';
+import { ProjectFilter } from '@shakers/shared';
+
+export type ProjectSortOrder = 'publishedAt_desc' | 'publishedAt_asc';
 
 export type FilterOperator = 'AND' | 'OR';
 
@@ -18,7 +20,7 @@ export interface FiltersState {
   skills: number[];
   industry: number[];
   projectType: number[];
-  order: SortOrder;
+  order: ProjectSortOrder;
   operators: FilterOperators;
 }
 
@@ -82,6 +84,26 @@ export function useFilters() {
     }));
   }, []);
 
+  const removeFilter = useCallback(
+    (type: 'specialty' | 'skill' | 'industry' | 'projectType', id: number) => {
+      setFilters((prev) => {
+        switch (type) {
+          case 'specialty':
+            return { ...prev, specialties: prev.specialties.filter((s) => s !== id) };
+          case 'skill':
+            return { ...prev, skills: prev.skills.filter((s) => s !== id) };
+          case 'industry':
+            return { ...prev, industry: prev.industry.filter((i) => i !== id) };
+          case 'projectType':
+            return { ...prev, projectType: prev.projectType.filter((p) => p !== id) };
+          default:
+            return prev;
+        }
+      });
+    },
+    [],
+  );
+
   const hasActiveFilters =
     filters.specialties.length > 0 ||
     filters.skills.length > 0 ||
@@ -114,6 +136,7 @@ export function useFilters() {
     clearAllFilters,
     updateTempFilter,
     toggleOperator,
+    removeFilter,
     getProjectFilter,
   };
 }

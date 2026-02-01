@@ -1,3 +1,4 @@
+export { AppliedFilters } from './applied-filters';
 export { FiltersModal } from './filters-modal';
 export { ProjectCard } from './project-card';
 export { ProjectsHeader } from './projects-header';

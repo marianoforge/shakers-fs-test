@@ -15,10 +15,10 @@ export async function getProjects(filter?: ProjectFilter): Promise<Project[]> {
     params['industry[]'] = filter.industry.map(String);
   }
   if (filter?.projectType?.length) {
-    params['projectType[]'] = filter.projectType;
+    params['projectType[]'] = filter.projectType.map(String);
   }
   if (filter?.order) {
-    params.order = filter.order;
+    params['order'] = filter.order;
   }
 
   return apiClient<Project[]>('/projects', { params });
