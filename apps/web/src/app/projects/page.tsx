@@ -5,13 +5,26 @@ import { useMemo } from 'react';
 import Box from '@mui/material/Box';
 import Stack from '@mui/material/Stack';
 
-import { ProjectCard, ProjectsHeader, ReferralBanner } from '@/components/projects';
+import { FiltersModal, ProjectCard, ProjectsHeader, ReferralBanner } from '@/components/projects';
 import { EmptyState, ErrorState, LoadingState } from '@/components/ui';
-import { useProjects, useStaticData } from '@/hooks';
+import { useFilters, useProjects, useStaticData } from '@/hooks';
 import { createIdResolver } from '@/lib/utils';
 
 export default function ProjectsPage() {
-  const { data: projects = [], isLoading, isError, error, refetch } = useProjects();
+  const {
+    tempFilters,
+    isModalOpen,
+    openModal,
+    closeModal,
+    applyFilters,
+    clearFilters,
+    updateTempFilter,
+    toggleOperator,
+    getProjectFilter,
+  } = useFilters();
+
+  const projectFilter = getProjectFilter();
+  const { data: projects = [], isLoading, isError, error, refetch } = useProjects(projectFilter);
   const { data: staticData } = useStaticData();
 
   const resolver = useMemo(() => createIdResolver(staticData), [staticData]);
@@ -25,7 +38,18 @@ export default function ProjectsPage() {
         minHeight: 'calc(100vh - 65px)',
       }}
     >
-      <ProjectsHeader />
+      <ProjectsHeader onFilterClick={openModal} />
+
+      <FiltersModal
+        open={isModalOpen}
+        onClose={closeModal}
+        onApply={applyFilters}
+        onClear={clearFilters}
+        filters={tempFilters}
+        onFilterChange={updateTempFilter}
+        onToggleOperator={toggleOperator}
+        staticData={staticData}
+      />
 
       <Box sx={{ mt: 5 }}>
         <ReferralBanner />

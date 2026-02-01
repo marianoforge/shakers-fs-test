@@ -11,8 +11,8 @@
       "@domain/*": ["domain/*"],
       "@application/*": ["application/*"],
       "@infrastructure/*": ["infrastructure/*"],
-      "@shakers/shared": ["../../packages/shared/dist/index"],
-      "@shakers/shared/*": ["../../packages/shared/dist/*"]
+      "@shakers/shared": ["../../../packages/shared/dist/index"],
+      "@shakers/shared/*": ["../../../packages/shared/dist/*"]
     },
     "target": "ES2022",
     "emitDecoratorMetadata": true,
