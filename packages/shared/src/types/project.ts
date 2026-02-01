@@ -68,12 +68,19 @@ export type Faq = z.infer<typeof FaqSchema>;
 export type Position = z.infer<typeof PositionSchema>;
 export type Project = z.infer<typeof ProjectSchema>;
 
+export const FilterOperatorSchema = z.enum(['AND', 'OR']);
+export type FilterOperator = z.infer<typeof FilterOperatorSchema>;
+
 export const ProjectFilterSchema = z.object({
   specialties: z.array(z.number()).optional(),
   skills: z.array(z.number()).optional(),
   industry: z.array(z.number()).optional(),
   projectType: z.array(z.number()).optional(),
   order: z.enum(['publishedAt_desc', 'publishedAt_asc']).optional(),
+  specialtiesOp: FilterOperatorSchema.optional(),
+  skillsOp: FilterOperatorSchema.optional(),
+  industryOp: FilterOperatorSchema.optional(),
+  projectTypeOp: FilterOperatorSchema.optional(),
 });
 
 export type ProjectFilter = z.infer<typeof ProjectFilterSchema>;
