@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+import { CheckIcon } from '@/components/ui';
+
 import type { Position } from '@shakers/shared';
 
 interface ProjectPositionCardProps {
@@ -11,6 +13,7 @@ interface ProjectPositionCardProps {
   skillNames: string[];
   onApply: (positionId: number) => void;
   isApplied?: boolean;
+  isLoading?: boolean;
 }
 
 export function ProjectPositionCard({
@@ -18,6 +21,7 @@ export function ProjectPositionCard({
   skillNames,
   onApply,
   isApplied = false,
+  isLoading = false,
 }: ProjectPositionCardProps) {
   const displaySkills = skillNames.slice(0, 4).join(', ');
   const hasMoreSkills = skillNames.length > 4;
@@ -36,13 +40,46 @@ export function ProjectPositionCard({
         height: '100%',
       }}
     >
+      {isApplied && (
+        <Box sx={{ mb: 2 }}>
+          <Box
+            sx={{
+              px: 1,
+              py: 0.75,
+              background: '#F8F9EC',
+              borderRadius: '6px',
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 0.75,
+            }}
+          >
+            <Box
+              sx={{
+                width: 16,
+                height: 16,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }}
+            >
+              <CheckIcon size={12} color="#181B1A" />
+            </Box>
+            <Typography
+              sx={{ color: '#181B1A', fontSize: 12, fontWeight: 400, lineHeight: '16px' }}
+            >
+              Aplicado
+            </Typography>
+          </Box>
+        </Box>
+      )}
+
       <Typography
         sx={{
           color: '#181B1A',
           fontSize: 20,
           fontWeight: 400,
           lineHeight: '28px',
-          minHeight: 56,
+          minHeight: isApplied ? 28 : 56,
           display: 'flex',
           alignItems: 'flex-start',
         }}
@@ -67,24 +104,30 @@ export function ProjectPositionCard({
 
       <Button
         onClick={() => onApply(position.id)}
+        disabled={isLoading}
         fullWidth
         sx={{
           mt: 2,
           py: 1,
           px: 1.5,
-          background: isApplied ? '#EDF7F6' : '#F0FF3D',
+          background: isApplied ? 'transparent' : '#F0FF3D',
           borderRadius: '6px',
-          color: '#181B1A',
+          color: isApplied ? '#CA4810' : '#181B1A',
           fontSize: 14,
           fontWeight: 400,
           lineHeight: '20px',
           textTransform: 'none',
+          border: isApplied ? '1px solid #CA4810' : 'none',
           '&:hover': {
-            background: isApplied ? '#d9efed' : '#e5f536',
+            background: isApplied ? 'rgba(202, 72, 16, 0.04)' : '#e5f536',
+            border: isApplied ? '1px solid #CA4810' : 'none',
+          },
+          '&:disabled': {
+            opacity: 0.6,
           },
         }}
       >
-        {isApplied ? 'Retirar candidatura' : 'Aplicar'}
+        {isApplied ? 'Retirar Candidatura' : 'Aplicar'}
       </Button>
     </Box>
   );

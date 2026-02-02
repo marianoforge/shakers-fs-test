@@ -27,3 +27,29 @@ export async function getProjects(filter?: ProjectFilter): Promise<Project[]> {
 export async function getProjectById(id: number): Promise<Project> {
   return apiClient<Project>(`/projects/${id}`);
 }
+
+export async function getProjectApplications(
+  projectId: number,
+): Promise<{ appliedPositions: number[] }> {
+  return apiClient<{ appliedPositions: number[] }>(`/projects/${projectId}/applications`);
+}
+
+export async function applyToPosition(
+  projectId: number,
+  positionId: number,
+): Promise<{ success: boolean; message: string }> {
+  return apiClient<{ success: boolean; message: string }>(`/projects/${projectId}/applications`, {
+    method: 'POST',
+    body: JSON.stringify({ positionId }),
+  });
+}
+
+export async function withdrawApplication(
+  projectId: number,
+  positionId: number,
+): Promise<{ success: boolean; message: string }> {
+  return apiClient<{ success: boolean; message: string }>(`/projects/${projectId}/applications`, {
+    method: 'DELETE',
+    body: JSON.stringify({ positionId }),
+  });
+}

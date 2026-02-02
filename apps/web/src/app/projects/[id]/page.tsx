@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { useParams } from 'next/navigation';
 
@@ -14,31 +14,33 @@ import {
   ProjectOwnerCard,
   ProjectPositionCard,
 } from '@/components/projects';
-import { ErrorState, LoadingState } from '@/components/ui';
-import { useProject, useStaticData } from '@/hooks';
+import { ErrorState, LoadingState, useToast } from '@/components/ui';
+import { useApplications, useProject, useStaticData } from '@/hooks';
 import { createIdResolver } from '@/lib/utils';
 
 export default function ProjectDetailPage() {
   const params = useParams();
   const projectId = parseInt(params.id as string, 10);
+  const { showToast } = useToast();
 
   const { data: project, isLoading, isError, error, refetch } = useProject(projectId);
   const { data: staticData } = useStaticData();
+  const { isApplied, apply, withdraw, isApplying, isWithdrawing } = useApplications(projectId);
 
   const resolver = useMemo(() => createIdResolver(staticData), [staticData]);
 
-  const [appliedPositions, setAppliedPositions] = useState<Set<number>>(new Set());
-
-  const handleApply = (positionId: number) => {
-    setAppliedPositions((prev) => {
-      const next = new Set(prev);
-      if (next.has(positionId)) {
-        next.delete(positionId);
+  const handleApply = async (positionId: number) => {
+    try {
+      if (isApplied(positionId)) {
+        await withdraw(positionId);
+        showToast('Candidatura retirada con éxito', 'info');
       } else {
-        next.add(positionId);
+        await apply(positionId);
+        showToast('Aplicación enviada con éxito', 'success');
       }
-      return next;
-    });
+    } catch {
+      showToast('Error al procesar la solicitud', 'error');
+    }
   };
 
   if (isLoading) {
@@ -122,7 +124,8 @@ export default function ProjectDetailPage() {
                       position={position}
                       skillNames={skillNames}
                       onApply={handleApply}
-                      isApplied={appliedPositions.has(position.id)}
+                      isApplied={isApplied(position.id)}
+                      isLoading={isApplying || isWithdrawing}
                     />
                   );
                 })}
