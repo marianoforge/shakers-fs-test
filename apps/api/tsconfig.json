@@ -10,9 +10,7 @@
     "paths": {
       "@domain/*": ["domain/*"],
       "@application/*": ["application/*"],
-      "@infrastructure/*": ["infrastructure/*"],
-      "@shakers/shared": ["../../../packages/shared/dist/index"],
-      "@shakers/shared/*": ["../../../packages/shared/dist/*"]
+      "@infrastructure/*": ["infrastructure/*"]
     },
     "target": "ES2022",
     "emitDecoratorMetadata": true,

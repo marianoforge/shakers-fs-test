@@ -22,6 +22,7 @@ export default function ProjectsPage() {
     tempFilters,
     isModalOpen,
     hasActiveFilters,
+    activeFiltersCount,
     openModal,
     closeModal,
     applyFilters,
@@ -30,6 +31,7 @@ export default function ProjectsPage() {
     updateTempFilter,
     toggleOperator,
     removeFilter,
+    setSortOrder,
     getProjectFilter,
   } = useFilters();
 
@@ -48,7 +50,12 @@ export default function ProjectsPage() {
         minHeight: 'calc(100vh - 65px)',
       }}
     >
-      <ProjectsHeader onFilterClick={openModal} />
+      <ProjectsHeader
+        onFilterClick={openModal}
+        sortOrder={filters.order}
+        onSortChange={setSortOrder}
+        activeFiltersCount={activeFiltersCount}
+      />
 
       <FiltersModal
         open={isModalOpen}

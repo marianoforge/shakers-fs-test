@@ -104,11 +104,21 @@ export function useFilters() {
     [],
   );
 
+  const setSortOrder = useCallback((order: ProjectSortOrder) => {
+    setFilters((prev) => ({ ...prev, order }));
+  }, []);
+
   const hasActiveFilters =
     filters.specialties.length > 0 ||
     filters.skills.length > 0 ||
     filters.industry.length > 0 ||
     filters.projectType.length > 0;
+
+  const activeFiltersCount =
+    filters.specialties.length +
+    filters.skills.length +
+    filters.industry.length +
+    filters.projectType.length;
 
   const getProjectFilter = useCallback((): ProjectFilter => {
     return {
@@ -129,6 +139,7 @@ export function useFilters() {
     tempFilters,
     isModalOpen,
     hasActiveFilters,
+    activeFiltersCount,
     openModal,
     closeModal,
     applyFilters,
@@ -137,6 +148,7 @@ export function useFilters() {
     updateTempFilter,
     toggleOperator,
     removeFilter,
+    setSortOrder,
     getProjectFilter,
   };
 }
