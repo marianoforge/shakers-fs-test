@@ -24,7 +24,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
           rel="stylesheet"
         />
       </head>
-      <body style={{ margin: 0 }}>
+      <body style={{ margin: 0, backgroundColor: '#f5f5f5' }}>
         <Providers>{children}</Providers>
       </body>
     </html>

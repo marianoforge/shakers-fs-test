@@ -1,5 +1,11 @@
 export { AppliedFilters } from './applied-filters';
 export { FiltersModal } from './filters-modal';
 export { ProjectCard } from './project-card';
+export { ProjectDescription } from './project-description';
+export { ProjectDetailBreadcrumb } from './project-detail-breadcrumb';
+export { ProjectDetailHero } from './project-detail-hero';
+export { ProjectFaqs } from './project-faqs';
+export { ProjectOwnerCard } from './project-owner-card';
+export { ProjectPositionCard } from './project-position-card';
 export { ProjectsHeader } from './projects-header';
 export { ReferralBanner } from './referral-banner';

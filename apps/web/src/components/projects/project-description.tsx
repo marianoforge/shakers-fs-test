@@ -1,0 +1,70 @@
+'use client';
+
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
+
+interface ProjectDescriptionProps {
+  description: string;
+  goals: string[];
+}
+
+export function ProjectDescription({ description, goals }: ProjectDescriptionProps) {
+  return (
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+        <Typography
+          sx={{
+            color: '#033028',
+            fontSize: 18,
+            fontWeight: 400,
+            lineHeight: '26px',
+          }}
+        >
+          Descripción del Proyecto
+        </Typography>
+        <Typography
+          sx={{
+            color: '#555E5C',
+            fontSize: 14,
+            fontWeight: 400,
+            lineHeight: '20px',
+          }}
+        >
+          {description}
+        </Typography>
+      </Box>
+
+      {goals.length > 0 && (
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+          <Typography
+            sx={{
+              color: '#033028',
+              fontSize: 16,
+              fontWeight: 400,
+              lineHeight: '22px',
+            }}
+          >
+            ¿Cuáles son los objetivos y tareas a realizar?
+          </Typography>
+          <Box component="ul" sx={{ m: 0, pl: 2.5 }}>
+            {goals.map((goal, index) => (
+              <Box
+                component="li"
+                key={index}
+                sx={{
+                  color: '#555E5C',
+                  fontSize: 14,
+                  fontWeight: 400,
+                  lineHeight: '20px',
+                  mb: 0.5,
+                }}
+              >
+                {goal}
+              </Box>
+            ))}
+          </Box>
+        </Box>
+      )}
+    </Box>
+  );
+}

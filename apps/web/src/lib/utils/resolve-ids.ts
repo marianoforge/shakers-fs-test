@@ -14,5 +14,7 @@ export function createIdResolver(staticData: StaticData | undefined) {
     resolveSubcategory: (id: number) => subcategoriesMap.get(id) ?? '',
     resolveIndustry: (id: number) => industriesMap.get(id) ?? '',
     resolveSpecialty: (id: number) => specialtiesMap.get(id) ?? '',
+    resolveSpecialties: (ids: number[]) =>
+      ids.map((id) => specialtiesMap.get(id) ?? `Specialty ${id}`),
   };
 }
