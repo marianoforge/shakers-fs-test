@@ -28,6 +28,7 @@ interface ProjectCardProps {
     hourTo: number | null;
   };
   skills: string[];
+  index?: number;
 }
 
 export function ProjectCard({
@@ -38,6 +39,7 @@ export function ProjectCard({
   subcategory,
   budget,
   skills,
+  index = 0,
 }: ProjectCardProps) {
   const [logoSrc, setLogoSrc] = useState(organization.logo || FALLBACK_LOGO);
 
@@ -56,14 +58,17 @@ export function ProjectCard({
   };
 
   const budgetText = formatBudget();
+  const animationDelay = index * 0.05;
 
   return (
     <Box
+      className="animate-slide-in-bounce"
       sx={{
         display: 'flex',
         flexDirection: 'column',
         alignSelf: 'stretch',
         gap: 1,
+        animationDelay: `${animationDelay}s`,
       }}
     >
       <Box

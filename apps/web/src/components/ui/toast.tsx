@@ -4,9 +4,9 @@ import { createContext, useCallback, useContext, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import Snackbar from '@mui/material/Snackbar';
+import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
-import { useTheme } from '@mui/material/styles';
 
 type ToastType = 'success' | 'error' | 'info';
 

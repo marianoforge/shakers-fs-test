@@ -48,6 +48,7 @@ export default function ProjectsPage() {
         py: { xs: 2, sm: 5 },
         bgcolor: 'white',
         minHeight: 'calc(100vh - 65px)',
+        overflow: 'hidden',
       }}
     >
       <ProjectsHeader
@@ -95,7 +96,7 @@ export default function ProjectsPage() {
 
         {!isLoading && !isError && projects.length > 0 && (
           <Stack spacing={5}>
-            {projects.map((project) => {
+            {projects.map((project, index) => {
               const skillIds = project.positions?.[0]?.skills ?? [];
               const skillNames = resolver.resolveSkills(skillIds);
               const categoryName = resolver.resolveCategory(project.category);
@@ -120,6 +121,7 @@ export default function ProjectsPage() {
                     hourTo: project.budget.hourTo ?? null,
                   }}
                   skills={skillNames}
+                  index={index}
                 />
               );
             })}

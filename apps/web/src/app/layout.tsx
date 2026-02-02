@@ -4,6 +4,8 @@ import type { Metadata } from 'next';
 
 import { Providers } from '@/providers';
 
+import '@/styles/animations.css';
+
 export const metadata: Metadata = {
   title: 'Shakers - Buscar Proyectos',
   description: 'Encuentra y aplica a proyectos que se ajusten a tus habilidades',
