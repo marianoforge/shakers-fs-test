@@ -33,7 +33,7 @@ function FaqItem({ faq, isOpen, onToggle }: { faq: Faq; isOpen: boolean; onToggl
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          gap: 4,
+          gap: { xs: 1, sm: 4 },
           cursor: 'pointer',
           '&:hover': { opacity: 0.8 },
         }}

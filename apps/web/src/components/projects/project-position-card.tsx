@@ -29,7 +29,8 @@ export function ProjectPositionCard({
   return (
     <Box
       sx={{
-        width: 300,
+        width: { xs: 300, sm: 300 },
+        maxWidth: '100%',
         p: 3,
         background: 'white',
         borderRadius: '12px',

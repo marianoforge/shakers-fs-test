@@ -44,8 +44,8 @@ export default function ProjectsPage() {
   return (
     <Box
       sx={{
-        px: 5,
-        py: 5,
+        px: { xs: 2, sm: 5 },
+        py: { xs: 2, sm: 5 },
         bgcolor: 'white',
         minHeight: 'calc(100vh - 65px)',
       }}
@@ -77,7 +77,7 @@ export default function ProjectsPage() {
         />
       )}
 
-      <Box sx={{ mt: hasActiveFilters ? 2 : 5 }}>
+      <Box sx={{ mt: hasActiveFilters ? 2 : 5, pb: { xs: 14, sm: 0 } }}>
         <ReferralBanner />
 
         {isLoading && <LoadingState message="Cargando proyectos..." />}

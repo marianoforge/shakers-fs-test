@@ -5,6 +5,7 @@ import { useMemo } from 'react';
 import { useParams } from 'next/navigation';
 
 import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 import {
   ProjectDescription,
@@ -45,7 +46,14 @@ export default function ProjectDetailPage() {
 
   if (isLoading) {
     return (
-      <Box sx={{ px: 5, py: 5, bgcolor: 'white', minHeight: 'calc(100vh - 65px)' }}>
+      <Box
+        sx={{
+          px: { xs: 2, sm: 5 },
+          py: { xs: 2, sm: 5 },
+          bgcolor: 'white',
+          minHeight: 'calc(100vh - 65px)',
+        }}
+      >
         <LoadingState message="Cargando proyecto..." />
       </Box>
     );
@@ -53,7 +61,14 @@ export default function ProjectDetailPage() {
 
   if (isError || !project) {
     return (
-      <Box sx={{ px: 5, py: 5, bgcolor: 'white', minHeight: 'calc(100vh - 65px)' }}>
+      <Box
+        sx={{
+          px: { xs: 2, sm: 5 },
+          py: { xs: 2, sm: 5 },
+          bgcolor: 'white',
+          minHeight: 'calc(100vh - 65px)',
+        }}
+      >
         <ErrorState
           message={error?.message ?? 'Error al cargar el proyecto'}
           onRetry={() => refetch()}
@@ -72,8 +87,8 @@ export default function ProjectDetailPage() {
     <Box sx={{ bgcolor: 'white', minHeight: 'calc(100vh - 65px)' }}>
       <ProjectDetailBreadcrumb projectTitle={project.title} />
 
-      <Box sx={{ px: 5, pb: 5 }}>
-        <Box sx={{ mt: 3 }}>
+      <Box sx={{ px: { xs: 2, sm: 5 }, pb: { xs: 3, sm: 5 } }}>
+        <Box sx={{ mt: { xs: 2, sm: 3 } }}>
           <ProjectDetailHero
             title={project.title}
             category={categoryName}
@@ -85,27 +100,24 @@ export default function ProjectDetailPage() {
           />
         </Box>
 
-        <Box sx={{ mt: 5, display: 'flex', gap: 8 }}>
-          <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 5 }}>
+        <Box sx={{ mt: { xs: 5, sm: 5 }, display: 'flex', gap: { xs: 5, sm: 8 } }}>
+          <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: { xs: 5, sm: 5 } }}>
             <ProjectDescription description={project.description} goals={project.goals} />
             <ProjectFaqs faqs={project.faqs} />
           </Box>
         </Box>
 
-        <Box sx={{ mt: 8, display: 'flex', gap: 8 }}>
-          <ProjectOwnerCard
-            name={project.projectLeader.name}
-            lastName={project.projectLeader.lastName}
-            organization={{
-              name: project.organization.name,
-              logo: project.organization.logo ?? '/logos/logos_brand.png',
-            }}
-          />
-
+        <Box
+          sx={{
+            mt: { xs: 3, sm: 8 },
+            display: 'flex',
+            flexDirection: { xs: 'column', md: 'row' },
+            gap: { xs: 8, sm: 8 },
+          }}
+        >
           {project.positions.length > 0 && (
             <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
-              <Box
-                component="span"
+              <Typography
                 sx={{
                   color: '#033028',
                   fontSize: 18,
@@ -114,8 +126,16 @@ export default function ProjectDetailPage() {
                 }}
               >
                 Equipo
-              </Box>
-              <Box sx={{ display: 'flex', gap: 2, flexWrap: 'wrap', alignItems: 'stretch' }}>
+              </Typography>
+              <Box
+                sx={{
+                  display: 'flex',
+                  flexDirection: { xs: 'column', sm: 'row' },
+                  gap: 2,
+                  flexWrap: 'wrap',
+                  alignItems: 'stretch',
+                }}
+              >
                 {project.positions.map((position) => {
                   const skillNames = resolver.resolveSkills(position.skills);
                   return (
@@ -132,6 +152,15 @@ export default function ProjectDetailPage() {
               </Box>
             </Box>
           )}
+
+          <ProjectOwnerCard
+            name={project.projectLeader.name}
+            lastName={project.projectLeader.lastName}
+            organization={{
+              name: project.organization.name,
+              logo: project.organization.logo ?? '/logos/logos_brand.png',
+            }}
+          />
         </Box>
       </Box>
     </Box>

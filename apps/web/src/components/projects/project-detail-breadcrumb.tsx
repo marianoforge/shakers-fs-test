@@ -17,8 +17,8 @@ export function ProjectDetailBreadcrumb({ projectTitle }: ProjectDetailBreadcrum
   return (
     <Box
       sx={{
-        pt: 5,
-        px: 5,
+        pt: { xs: 1.5, sm: 5 },
+        px: { xs: 2, sm: 5 },
         background: 'rgba(255, 255, 255, 0.80)',
         backdropFilter: 'blur(5px)',
         display: 'flex',
@@ -30,7 +30,7 @@ export function ProjectDetailBreadcrumb({ projectTitle }: ProjectDetailBreadcrum
         <Box
           onClick={() => router.push('/projects')}
           sx={{
-            py: 0.75,
+            p: 0.75,
             borderRadius: '6px',
             display: 'flex',
             alignItems: 'center',
@@ -50,36 +50,64 @@ export function ProjectDetailBreadcrumb({ projectTitle }: ProjectDetailBreadcrum
           >
             <ChevronLeftIcon size={16} />
           </Box>
-          <Typography sx={{ color: '#033028', fontSize: 12, fontWeight: 400, lineHeight: '16px' }}>
+          <Typography
+            sx={{
+              color: '#033028',
+              fontSize: 12,
+              fontWeight: 400,
+              lineHeight: '16px',
+              display: { xs: 'none', sm: 'block' },
+            }}
+          >
             Atrás
           </Typography>
         </Box>
 
         <Box sx={{ flex: 1, display: 'flex', alignItems: 'center' }}>
-          <Box sx={{ py: 0.5, pl: 0.75, display: 'flex', alignItems: 'center', gap: 0.75 }}>
+          <Box sx={{ py: 0.5, px: 0.75, display: 'flex', alignItems: 'center', gap: 0.75 }}>
             <Typography
-              sx={{ color: '#555E5C', fontSize: 12, fontWeight: 400, lineHeight: '16px' }}
+              sx={{
+                color: '#555E5C',
+                fontSize: { xs: 10, sm: 12 },
+                fontWeight: 400,
+                lineHeight: { xs: '14px', sm: '16px' },
+              }}
             >
               Buscador Proyectos
             </Typography>
           </Box>
-          <Box sx={{ py: 0.5, pl: 0.75, display: 'flex', alignItems: 'center', gap: 0.75 }}>
+          <Box
+            sx={{
+              flex: 1,
+              py: 0.5,
+              px: 0.75,
+              display: 'flex',
+              alignItems: 'center',
+              gap: 0.75,
+            }}
+          >
             <Typography
-              sx={{ color: '#555E5C', fontSize: 12, fontWeight: 400, lineHeight: '16px' }}
+              sx={{
+                color: '#555E5C',
+                fontSize: { xs: 10, sm: 12 },
+                fontWeight: 400,
+                lineHeight: { xs: '14px', sm: '16px' },
+              }}
             >
               /
             </Typography>
             <Typography
               sx={{
+                flex: 1,
                 color: '#181B1A',
-                fontSize: 12,
+                fontSize: { xs: 10, sm: 12 },
                 fontStyle: 'italic',
                 fontWeight: 700,
-                lineHeight: '16px',
-                maxWidth: 400,
+                lineHeight: { xs: '14px', sm: '16px' },
+                maxWidth: { xs: 'none', sm: 400 },
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',
-                whiteSpace: 'nowrap',
+                whiteSpace: { xs: 'normal', sm: 'nowrap' },
               }}
             >
               {projectTitle}

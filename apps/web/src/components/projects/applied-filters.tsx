@@ -29,8 +29,8 @@ function FilterChipWhite({ label, onDelete }: { label: string; onDelete: () => v
   return (
     <Box
       sx={{
-        px: 1,
-        py: 0.75,
+        px: { xs: 0.75, sm: 1 },
+        py: { xs: 0.5, sm: 0.75 },
         bgcolor: 'white',
         borderRadius: '6px',
         display: 'flex',
@@ -41,9 +41,9 @@ function FilterChipWhite({ label, onDelete }: { label: string; onDelete: () => v
       <Typography
         sx={{
           color: '#033028',
-          fontSize: 12,
+          fontSize: { xs: 10, sm: 12 },
           fontWeight: 400,
-          lineHeight: '16px',
+          lineHeight: { xs: '14px', sm: '16px' },
         }}
       >
         {label}
@@ -51,15 +51,15 @@ function FilterChipWhite({ label, onDelete }: { label: string; onDelete: () => v
       <Box
         onClick={onDelete}
         sx={{
-          width: 16,
-          height: 16,
+          width: { xs: 14, sm: 16 },
+          height: { xs: 14, sm: 16 },
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           cursor: 'pointer',
         }}
       >
-        <CloseIcon sx={{ fontSize: 12, color: '#033028' }} />
+        <CloseIcon sx={{ fontSize: { xs: 10, sm: 12 }, color: '#033028' }} />
       </Box>
     </Box>
   );
@@ -79,29 +79,29 @@ function FilterGroupRow({
       sx={{
         display: 'flex',
         alignItems: 'center',
-        gap: 1,
+        gap: { xs: 0.5, sm: 1 },
         flexWrap: 'wrap',
       }}
     >
       <Typography
         sx={{
           color: '#555E5C',
-          fontSize: 14,
+          fontSize: { xs: 12, sm: 14 },
           fontWeight: 400,
-          lineHeight: '20px',
+          lineHeight: { xs: '16px', sm: '20px' },
         }}
       >
         {group.label}:
       </Typography>
       {group.items.map((item, index) => (
-        <Box key={item.id} sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+        <Box key={item.id} sx={{ display: 'flex', alignItems: 'center', gap: { xs: 0.5, sm: 1 } }}>
           {index > 0 && (
             <Typography
               sx={{
                 color: '#555E5C',
-                fontSize: 14,
+                fontSize: { xs: 12, sm: 14 },
                 fontWeight: 400,
-                lineHeight: '20px',
+                lineHeight: { xs: '16px', sm: '20px' },
               }}
             >
               {operatorLabel}
@@ -182,14 +182,14 @@ export function AppliedFilters({ filters, staticData, onRemoveFilter }: AppliedF
   return (
     <Box
       sx={{
-        mt: 3,
-        px: 2,
-        py: 1.5,
+        mt: { xs: 2, sm: 3 },
+        px: { xs: 1.5, sm: 2 },
+        py: { xs: 1, sm: 1.5 },
         bgcolor: '#EDF7F6',
         borderRadius: '6px',
         display: 'flex',
         flexDirection: 'column',
-        gap: isExpanded ? 2 : 0,
+        gap: isExpanded ? { xs: 1.5, sm: 2 } : 0,
       }}
     >
       <Box
@@ -198,7 +198,7 @@ export function AppliedFilters({ filters, staticData, onRemoveFilter }: AppliedF
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'space-between',
-          minWidth: 300,
+          minWidth: { xs: 'auto', sm: 300 },
           cursor: 'pointer',
           userSelect: 'none',
         }}
@@ -206,10 +206,10 @@ export function AppliedFilters({ filters, staticData, onRemoveFilter }: AppliedF
         <Typography
           sx={{
             color: '#181B1A',
-            fontSize: 16,
+            fontSize: { xs: 14, sm: 16 },
             fontStyle: 'italic',
             fontWeight: 400,
-            lineHeight: '22px',
+            lineHeight: { xs: '20px', sm: '22px' },
           }}
         >
           Filtros aplicados
@@ -230,7 +230,7 @@ export function AppliedFilters({ filters, staticData, onRemoveFilter }: AppliedF
       </Box>
 
       <Collapse in={isExpanded}>
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 1.5, sm: 2 } }}>
           {groups.map((group) => (
             <FilterGroupRow key={group.type} group={group} onRemoveFilter={onRemoveFilter} />
           ))}

@@ -10,7 +10,7 @@ interface ProjectDescriptionProps {
 
 export function ProjectDescription({ description, goals }: ProjectDescriptionProps) {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 3, sm: 3 } }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
         <Typography
           sx={{
@@ -46,23 +46,16 @@ export function ProjectDescription({ description, goals }: ProjectDescriptionPro
           >
             ¿Cuáles son los objetivos y tareas a realizar?
           </Typography>
-          <Box component="ul" sx={{ m: 0, pl: 2.5 }}>
-            {goals.map((goal, index) => (
-              <Box
-                component="li"
-                key={index}
-                sx={{
-                  color: '#555E5C',
-                  fontSize: 14,
-                  fontWeight: 400,
-                  lineHeight: '20px',
-                  mb: 0.5,
-                }}
-              >
-                {goal}
-              </Box>
-            ))}
-          </Box>
+          <Typography
+            sx={{
+              color: '#555E5C',
+              fontSize: 14,
+              fontWeight: 400,
+              lineHeight: '20px',
+            }}
+          >
+            {goals.join(' ')}
+          </Typography>
         </Box>
       )}
     </Box>

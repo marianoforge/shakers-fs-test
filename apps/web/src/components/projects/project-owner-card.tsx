@@ -34,7 +34,8 @@ export function ProjectOwnerCard({ name, lastName, organization }: ProjectOwnerC
       </Typography>
       <Box
         sx={{
-          width: 300,
+          width: { xs: 300, sm: 300 },
+          maxWidth: '100%',
           p: 3,
           background: 'white',
           borderRadius: '12px',
@@ -65,7 +66,14 @@ export function ProjectOwnerCard({ name, lastName, organization }: ProjectOwnerC
               unoptimized
             />
           </Box>
-          <Typography sx={{ color: '#181B1A', fontSize: 16, fontWeight: 400, lineHeight: '22px' }}>
+          <Typography
+            sx={{
+              color: '#181B1A',
+              fontSize: 16,
+              fontWeight: 400,
+              lineHeight: '22px',
+            }}
+          >
             {organization.name}
           </Typography>
         </Box>
@@ -89,10 +97,24 @@ export function ProjectOwnerCard({ name, lastName, organization }: ProjectOwnerC
         </Box>
 
         <Box>
-          <Typography sx={{ color: '#181B1A', fontSize: 20, fontWeight: 400, lineHeight: '28px' }}>
+          <Typography
+            sx={{
+              color: '#181B1A',
+              fontSize: 20,
+              fontWeight: 400,
+              lineHeight: '28px',
+            }}
+          >
             {fullName}
           </Typography>
-          <Typography sx={{ color: '#555E5C', fontSize: 16, fontWeight: 400, lineHeight: '22px' }}>
+          <Typography
+            sx={{
+              color: '#555E5C',
+              fontSize: 16,
+              fontWeight: 400,
+              lineHeight: '22px',
+            }}
+          >
             Project Owner
           </Typography>
         </Box>

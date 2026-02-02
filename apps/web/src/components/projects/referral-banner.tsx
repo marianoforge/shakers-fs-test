@@ -6,7 +6,7 @@ import Chip from '@mui/material/Chip';
 
 export function ReferralBanner() {
   return (
-    <Box sx={{ mb: 1 }}>
+    <Box sx={{ mb: 1, display: { xs: 'none', sm: 'block' } }}>
       <Chip
         icon={<EuroIcon sx={{ fontSize: 16, color: '#181B1A' }} />}
         label="¡Gana 1500€ por referir!"

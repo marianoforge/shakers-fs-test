@@ -5,6 +5,8 @@ import { createContext, useCallback, useContext, useState } from 'react';
 import Box from '@mui/material/Box';
 import Snackbar from '@mui/material/Snackbar';
 import Typography from '@mui/material/Typography';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 type ToastType = 'success' | 'error' | 'info';
 
@@ -29,6 +31,9 @@ export function useToast() {
 }
 
 export function ToastProvider({ children }: { children: React.ReactNode }) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const [toast, setToast] = useState<ToastState>({
     open: false,
     message: '',
@@ -62,9 +67,20 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
       {children}
       <Snackbar
         open={toast.open}
-        autoHideDuration={4000}
+        autoHideDuration={5000}
         onClose={handleClose}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: isMobile ? 'center' : 'right',
+        }}
+        sx={{
+          top: isMobile ? 16 : 24,
+          ...(isMobile && {
+            left: '50%',
+            right: 'auto',
+            transform: 'translateX(-50%)',
+          }),
+        }}
       >
         <Box
           sx={{
@@ -75,15 +91,17 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
             display: 'flex',
             alignItems: 'center',
             gap: 1.5,
-            minWidth: 200,
+            minWidth: isMobile ? 'auto' : 200,
+            maxWidth: isMobile ? 'calc(100vw - 32px)' : 'none',
+            boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.15)',
           }}
         >
           <Typography
             sx={{
               color: styles.color,
-              fontSize: 16,
+              fontSize: isMobile ? 14 : 16,
               fontWeight: 400,
-              lineHeight: '22px',
+              lineHeight: isMobile ? '20px' : '22px',
             }}
           >
             {toast.message}

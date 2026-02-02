@@ -50,8 +50,8 @@ export function ProjectsHeader({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'flex-end',
-        gap: 2,
-        pt: 3,
+        gap: { xs: 1, sm: 2 },
+        pt: { xs: 1.5, sm: 3 },
         pb: 1.5,
       }}
     >
@@ -66,6 +66,7 @@ export function ProjectsHeader({
           px: 1,
           py: 0.75,
           borderRadius: 1.5,
+          minWidth: 'auto',
           '&:hover': {
             bgcolor: 'rgba(3, 48, 40, 0.04)',
           },
@@ -105,13 +106,22 @@ export function ProjectsHeader({
           py: 0.75,
           borderRadius: 1.5,
           borderColor: '#033028',
+          minWidth: 'auto',
           '&:hover': {
             borderColor: '#033028',
             bgcolor: 'rgba(3, 48, 40, 0.04)',
           },
+          '& .MuiButton-startIcon': {
+            mr: { xs: 0.5, sm: 1 },
+          },
         }}
       >
-        {sortLabel}
+        <Box component="span" sx={{ display: { xs: 'none', sm: 'inline' } }}>
+          {sortLabel}
+        </Box>
+        <Box component="span" sx={{ display: { xs: 'inline', sm: 'none' } }}>
+          publicación
+        </Box>
       </Button>
 
       <Menu

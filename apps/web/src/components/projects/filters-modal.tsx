@@ -12,6 +12,8 @@ import Radio from '@mui/material/Radio';
 import TextField from '@mui/material/TextField';
 import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 import { FilterChip } from '@/components/ui';
 import { FilterOperator, FilterOperators, FiltersState } from '@/hooks/use-filters';
@@ -102,7 +104,14 @@ function FilterField({
   return (
     <Box sx={{ display: 'flex', alignItems: 'flex-end', gap: 3 }}>
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 0.75 }}>
-        <Typography sx={{ color: '#181B1A', fontSize: 16, fontWeight: 400, lineHeight: '22px' }}>
+        <Typography
+          sx={{
+            color: '#181B1A',
+            fontSize: 16,
+            fontWeight: 400,
+            lineHeight: '22px',
+          }}
+        >
           {label}
         </Typography>
         {children}
@@ -145,6 +154,9 @@ export function FiltersModal({
   onToggleOperator,
   staticData,
 }: FiltersModalProps) {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+
   const specialties = staticData?.specialties ?? [];
   const skills = staticData?.skills ?? [];
   const industries = staticData?.industries ?? [];
@@ -189,12 +201,16 @@ export function FiltersModal({
       onClose={onClose}
       maxWidth="sm"
       fullWidth
+      fullScreen={isMobile}
       PaperProps={{
         sx: {
-          borderRadius: '6px',
-          p: 5,
+          borderRadius: isMobile ? 0 : '6px',
+          px: 2,
+          pt: 5,
+          pb: 5,
+          ...(isMobile ? {} : { p: 5 }),
           position: 'relative',
-          overflow: 'visible',
+          overflow: 'auto',
         },
       }}
     >
@@ -350,7 +366,14 @@ export function FiltersModal({
         </FilterField>
 
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
-          <Typography sx={{ color: '#181B1A', fontSize: 16, fontWeight: 400, lineHeight: '22px' }}>
+          <Typography
+            sx={{
+              color: '#181B1A',
+              fontSize: 16,
+              fontWeight: 400,
+              lineHeight: '22px',
+            }}
+          >
             Ordenar por
           </Typography>
           <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
@@ -375,7 +398,12 @@ export function FiltersModal({
                 }}
               />
               <Typography
-                sx={{ color: '#181B1A', fontSize: 14, fontWeight: 400, lineHeight: '20px' }}
+                sx={{
+                  color: '#181B1A',
+                  fontSize: 14,
+                  fontWeight: 400,
+                  lineHeight: '20px',
+                }}
               >
                 Fecha de publicación (Más reciente primero)
               </Typography>
@@ -401,7 +429,12 @@ export function FiltersModal({
                 }}
               />
               <Typography
-                sx={{ color: '#181B1A', fontSize: 14, fontWeight: 400, lineHeight: '20px' }}
+                sx={{
+                  color: '#181B1A',
+                  fontSize: 14,
+                  fontWeight: 400,
+                  lineHeight: '20px',
+                }}
               >
                 Fecha de publicación (Más antiguo primero)
               </Typography>
@@ -409,42 +442,91 @@ export function FiltersModal({
           </Box>
         </Box>
 
-        <Box sx={{ display: 'flex', gap: 3, mt: 1 }}>
-          <Button
-            onClick={onClear}
-            sx={{
-              flex: 1,
-              py: 1.5,
-              px: 2,
-              borderRadius: '6px',
-              color: '#CA4810',
-              fontSize: 16,
-              fontWeight: 400,
-              lineHeight: '22px',
-              textTransform: 'none',
-              '&:hover': { bgcolor: 'rgba(202, 72, 16, 0.04)' },
-            }}
-          >
-            Eliminar Filtros
-          </Button>
-          <Button
-            onClick={onApply}
-            sx={{
-              flex: 1,
-              py: 1.5,
-              px: 2,
-              borderRadius: '6px',
-              bgcolor: '#033028',
-              color: 'white',
-              fontSize: 16,
-              fontWeight: 400,
-              lineHeight: '22px',
-              textTransform: 'none',
-              '&:hover': { bgcolor: '#022018' },
-            }}
-          >
-            Filtrar
-          </Button>
+        <Box
+          sx={{
+            display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
+            gap: 3,
+            mt: 1,
+          }}
+        >
+          {isMobile ? (
+            <>
+              <Button
+                onClick={onApply}
+                fullWidth
+                sx={{
+                  py: 1.5,
+                  px: 2,
+                  borderRadius: '6px',
+                  bgcolor: '#033028',
+                  color: 'white',
+                  fontSize: 16,
+                  fontWeight: 400,
+                  lineHeight: '22px',
+                  textTransform: 'none',
+                  '&:hover': { bgcolor: '#022018' },
+                }}
+              >
+                Filtrar
+              </Button>
+              <Button
+                onClick={onClear}
+                fullWidth
+                sx={{
+                  py: 1.5,
+                  px: 2,
+                  borderRadius: '6px',
+                  color: '#CA4810',
+                  fontSize: 16,
+                  fontWeight: 400,
+                  lineHeight: '22px',
+                  textTransform: 'none',
+                  '&:hover': { bgcolor: 'rgba(202, 72, 16, 0.04)' },
+                }}
+              >
+                Eliminar Filtros
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                onClick={onClear}
+                sx={{
+                  flex: 1,
+                  py: 1.5,
+                  px: 2,
+                  borderRadius: '6px',
+                  color: '#CA4810',
+                  fontSize: 16,
+                  fontWeight: 400,
+                  lineHeight: '22px',
+                  textTransform: 'none',
+                  '&:hover': { bgcolor: 'rgba(202, 72, 16, 0.04)' },
+                }}
+              >
+                Eliminar Filtros
+              </Button>
+              <Button
+                onClick={onApply}
+                sx={{
+                  flex: 1,
+                  py: 1.5,
+                  px: 2,
+                  borderRadius: '6px',
+                  bgcolor: '#033028',
+                  color: 'white',
+                  fontSize: 16,
+                  fontWeight: 400,
+                  lineHeight: '22px',
+                  textTransform: 'none',
+                  '&:hover': { bgcolor: '#022018' },
+                }}
+              >
+                Filtrar
+              </Button>
+            </>
+          )}
         </Box>
       </Box>
     </Dialog>

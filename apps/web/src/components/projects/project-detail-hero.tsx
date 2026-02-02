@@ -42,7 +42,14 @@ function InfoBadge({ icon, label }: { icon: React.ReactNode; label: string }) {
       >
         {icon}
       </Box>
-      <Typography sx={{ color: '#181B1A', fontSize: 12, fontWeight: 400, lineHeight: '16px' }}>
+      <Typography
+        sx={{
+          color: '#181B1A',
+          fontSize: 12,
+          fontWeight: 400,
+          lineHeight: '16px',
+        }}
+      >
         {label}
       </Typography>
     </Box>
@@ -61,8 +68,8 @@ export function ProjectDetailHero({
   return (
     <Box
       sx={{
-        px: 5,
-        py: 3,
+        px: { xs: 2, sm: 5 },
+        py: { xs: 3, sm: 3 },
         background: '#033028',
         borderRadius: '6px',
         display: 'flex',
@@ -70,7 +77,14 @@ export function ProjectDetailHero({
         gap: 1,
       }}
     >
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          flexDirection: { xs: 'column', sm: 'row' },
+          alignItems: { xs: 'flex-start', sm: 'center' },
+          gap: { xs: 1, sm: 2 },
+        }}
+      >
         <Typography
           sx={{
             flex: 1,
@@ -84,11 +98,11 @@ export function ProjectDetailHero({
         </Typography>
         <Box
           sx={{
+            display: { xs: 'none', sm: 'flex' },
             px: 1,
             py: 0.75,
             background: '#EDF7F6',
             borderRadius: '6px',
-            display: 'flex',
             alignItems: 'center',
             gap: 0.75,
           }}
@@ -104,7 +118,14 @@ export function ProjectDetailHero({
           >
             <CategoryIcon size={12} />
           </Box>
-          <Typography sx={{ color: '#181B1A', fontSize: 12, fontWeight: 400, lineHeight: '16px' }}>
+          <Typography
+            sx={{
+              color: '#181B1A',
+              fontSize: 12,
+              fontWeight: 400,
+              lineHeight: '16px',
+            }}
+          >
             {category}
           </Typography>
         </Box>
@@ -121,7 +142,15 @@ export function ProjectDetailHero({
         {specialty}
       </Typography>
 
-      <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, flexWrap: 'wrap', mt: 0.5 }}>
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'flex-start',
+          gap: 1,
+          flexWrap: 'wrap',
+          mt: 0.5,
+        }}
+      >
         <InfoBadge icon={<CalendarIcon size={12} />} label={`Inicio: ${formatDate(startDate)}`} />
         <InfoBadge icon={<ClockIcon size={12} />} label={`${formatNumber(totalHours)} horas`} />
         {budget && (

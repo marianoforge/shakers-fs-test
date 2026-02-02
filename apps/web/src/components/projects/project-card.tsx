@@ -5,6 +5,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 
+import EuroIcon from '@mui/icons-material/Euro';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
@@ -59,256 +60,314 @@ export function ProjectCard({
   return (
     <Box
       sx={{
-        display: 'inline-flex',
+        display: 'flex',
+        flexDirection: 'column',
         alignSelf: 'stretch',
+        gap: 1,
       }}
     >
       <Box
-        component={Link}
-        href={`/projects/${id}`}
         sx={{
-          flex: '1 1 0',
-          p: 3,
-          background: 'white',
-          overflow: 'hidden',
-          borderTopLeftRadius: '8px',
-          borderBottomLeftRadius: '8px',
-          outline: '1px solid #E4E7E7',
-          outlineOffset: '-1px',
-          display: 'inline-flex',
-          flexDirection: 'column',
-          justifyContent: 'flex-start',
-          alignItems: 'flex-end',
-          gap: 3,
-          textDecoration: 'none',
-          '&:hover': {
-            background: '#FAFAFA',
-          },
+          display: { xs: 'flex', sm: 'none' },
+          alignItems: 'center',
+          gap: 1,
         }}
       >
         <Box
           sx={{
-            alignSelf: 'stretch',
-            display: 'inline-flex',
-            justifyContent: 'flex-start',
-            alignItems: 'flex-start',
-            gap: 2,
+            height: 22,
+            px: 0.75,
+            py: 0.5,
+            bgcolor: '#EDF7F6',
+            borderRadius: '6px',
+            display: 'flex',
+            alignItems: 'center',
+            gap: 0.75,
           }}
         >
-          <Box
+          <EuroIcon sx={{ fontSize: 14, color: '#181B1A' }} />
+          <Typography
             sx={{
-              display: 'inline-flex',
-              flexDirection: 'column',
-              justifyContent: 'center',
-              alignItems: 'flex-start',
-              gap: 1,
+              color: '#033028',
+              fontSize: 10,
+              fontWeight: 400,
+              lineHeight: '14px',
             }}
           >
-            <Image
-              src={logoSrc}
-              alt={organization.name}
-              width={82}
-              height={82}
-              onError={handleImageError}
-              unoptimized
-              style={{
-                borderRadius: '6px',
-                objectFit: 'cover',
-              }}
-            />
-            <Typography
-              sx={{
-                width: 82,
-                textAlign: 'center',
-                color: '#AEB7B4',
-                fontSize: 12,
-                fontWeight: 400,
-                lineHeight: '16px',
-                wordBreak: 'break-word',
-                display: '-webkit-box',
-                WebkitLineClamp: 2,
-                WebkitBoxOrient: 'vertical',
-                overflow: 'hidden',
-              }}
-            >
-              {organization.name}
-            </Typography>
-          </Box>
-
-          <Box
-            sx={{
-              flex: '1 1 0',
-              alignSelf: 'stretch',
-              display: 'inline-flex',
-              flexDirection: 'column',
-              justifyContent: 'flex-start',
-              alignItems: 'flex-start',
-              gap: 1.5,
-            }}
-          >
-            <Box
-              sx={{
-                alignSelf: 'stretch',
-                display: 'inline-flex',
-                justifyContent: 'flex-end',
-                alignItems: 'flex-start',
-                gap: 1.5,
-              }}
-            >
-              <Typography
-                sx={{
-                  flex: '1 1 0',
-                  alignSelf: 'stretch',
-                  color: '#181B1A',
-                  fontSize: 18,
-                  fontWeight: 400,
-                  lineHeight: '26px',
-                }}
-              >
-                {title}
-              </Typography>
-            </Box>
-
-            <Box
-              sx={{
-                alignSelf: 'stretch',
-                display: 'inline-flex',
-                justifyContent: 'flex-start',
-                alignItems: 'center',
-                gap: 1,
-                flexWrap: 'wrap',
-              }}
-            >
-              <Typography
-                sx={{
-                  color: '#0B5A4C',
-                  fontSize: 14,
-                  fontWeight: 400,
-                  lineHeight: '20px',
-                }}
-              >
-                {category}
-                {subcategory || budgetText ? '  |  ' : ''}
-              </Typography>
-              {subcategory && (
-                <Typography
-                  sx={{
-                    color: '#0B5A4C',
-                    fontSize: 14,
-                    fontWeight: 400,
-                    lineHeight: '20px',
-                  }}
-                >
-                  {subcategory}
-                  {budgetText ? '  |  ' : ''}
-                </Typography>
-              )}
-              {budgetText && (
-                <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                  <Image src="/icons/currency-euro.svg" alt="€" width={16} height={16} />
-                  <Typography
-                    sx={{
-                      color: '#0B5A4C',
-                      fontSize: 14,
-                      fontWeight: 400,
-                      lineHeight: '20px',
-                    }}
-                  >
-                    {budgetText}
-                  </Typography>
-                </Box>
-              )}
-            </Box>
-
-            <Box
-              sx={{
-                alignSelf: 'stretch',
-                display: 'inline-flex',
-                justifyContent: 'flex-start',
-                alignItems: 'flex-start',
-                gap: 1,
-                flexWrap: 'wrap',
-              }}
-            >
-              {skills.map((skill) => {
-                const skillIcon = getSkillIcon(skill);
-                return (
-                  <Box
-                    key={skill}
-                    sx={{
-                      px: 1,
-                      py: 0.75,
-                      background: '#F4F5F5',
-                      borderRadius: '6px',
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      gap: 0.75,
-                    }}
-                  >
-                    {skillIcon && (
-                      <Image
-                        src={skillIcon}
-                        alt={skill}
-                        width={16}
-                        height={16}
-                        style={{ borderRadius: '2px' }}
-                      />
-                    )}
-                    <Typography
-                      sx={{
-                        color: '#181B1A',
-                        fontSize: 12,
-                        fontWeight: 400,
-                        lineHeight: '16px',
-                      }}
-                    >
-                      {skill}
-                    </Typography>
-                  </Box>
-                );
-              })}
-            </Box>
-          </Box>
+            ¡Gana 1500€ por referir!
+          </Typography>
         </Box>
       </Box>
 
       <Box
-        component={Link}
-        href={`/projects/${id}`}
         sx={{
+          display: 'flex',
           alignSelf: 'stretch',
-          px: 0.75,
-          py: 2,
-          background: 'white',
-          overflow: 'hidden',
-          borderTopRightRadius: '8px',
-          borderBottomRightRadius: '8px',
-          outline: '1px solid #E4E7E7',
-          outlineOffset: '-1px',
-          display: 'inline-flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
-          gap: 3,
-          textDecoration: 'none',
-          '&:hover': {
-            background: '#FAFAFA',
-          },
         }}
       >
         <Box
+          component={Link}
+          href={`/projects/${id}`}
           sx={{
-            p: 0.75,
+            flex: '1 1 0',
+            p: { xs: 1.5, sm: 3 },
+            background: 'white',
             overflow: 'hidden',
-            borderRadius: '6px',
-            display: 'inline-flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            gap: 1,
+            borderTopLeftRadius: '8px',
+            borderBottomLeftRadius: '8px',
+            borderTopRightRadius: { xs: '8px', sm: 0 },
+            borderBottomRightRadius: { xs: '8px', sm: 0 },
+            outline: '1px solid #E4E7E7',
+            outlineOffset: '-1px',
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'flex-start',
+            alignItems: 'flex-end',
+            gap: { xs: 1.5, sm: 3 },
+            textDecoration: 'none',
+            '&:hover': {
+              background: '#FAFAFA',
+            },
           }}
         >
-          <Image src="/icons/chevron.svg" alt="" width={24} height={24} />
+          <Box
+            sx={{
+              alignSelf: 'stretch',
+              display: 'flex',
+              justifyContent: 'flex-start',
+              alignItems: 'flex-start',
+              gap: 2,
+            }}
+          >
+            <Box
+              sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'center',
+                alignItems: 'flex-start',
+                gap: 1,
+              }}
+            >
+              <Box
+                sx={{
+                  width: { xs: 48, sm: 82 },
+                  height: { xs: 48, sm: 82 },
+                  position: 'relative',
+                  borderRadius: '6px',
+                  overflow: 'hidden',
+                }}
+              >
+                <Image
+                  src={logoSrc}
+                  alt={organization.name}
+                  fill
+                  onError={handleImageError}
+                  unoptimized
+                  style={{
+                    objectFit: 'cover',
+                  }}
+                />
+              </Box>
+              <Typography
+                sx={{
+                  width: { xs: 48, sm: 82 },
+                  textAlign: 'center',
+                  color: '#AEB7B4',
+                  fontSize: { xs: 10, sm: 12 },
+                  fontWeight: 400,
+                  lineHeight: { xs: '14px', sm: '16px' },
+                  wordBreak: 'break-word',
+                  display: '-webkit-box',
+                  WebkitLineClamp: 2,
+                  WebkitBoxOrient: 'vertical',
+                  overflow: 'hidden',
+                }}
+              >
+                {organization.name}
+              </Typography>
+            </Box>
+
+            <Box
+              sx={{
+                flex: '1 1 0',
+                alignSelf: 'stretch',
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'flex-start',
+                alignItems: 'flex-start',
+                gap: { xs: 0.75, sm: 1.5 },
+              }}
+            >
+              <Box
+                sx={{
+                  alignSelf: 'stretch',
+                  display: 'flex',
+                  justifyContent: 'flex-end',
+                  alignItems: 'flex-start',
+                  gap: 1.5,
+                }}
+              >
+                <Typography
+                  sx={{
+                    flex: '1 1 0',
+                    alignSelf: 'stretch',
+                    color: '#181B1A',
+                    fontSize: { xs: 14, sm: 18 },
+                    fontWeight: 400,
+                    lineHeight: { xs: '20px', sm: '26px' },
+                  }}
+                >
+                  {title}
+                </Typography>
+              </Box>
+
+              <Box
+                sx={{
+                  alignSelf: 'stretch',
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                  alignItems: 'center',
+                  gap: { xs: 0.5, sm: 1 },
+                  flexWrap: 'wrap',
+                }}
+              >
+                <Typography
+                  sx={{
+                    color: '#0B5A4C',
+                    fontSize: { xs: 10, sm: 14 },
+                    fontWeight: 400,
+                    lineHeight: { xs: '14px', sm: '20px' },
+                  }}
+                >
+                  {category}
+                  {subcategory || budgetText ? '  |  ' : ''}
+                </Typography>
+                {subcategory && (
+                  <Typography
+                    sx={{
+                      color: '#0B5A4C',
+                      fontSize: { xs: 10, sm: 14 },
+                      fontWeight: 400,
+                      lineHeight: { xs: '14px', sm: '20px' },
+                    }}
+                  >
+                    {subcategory}
+                    {budgetText ? '  |  ' : ''}
+                  </Typography>
+                )}
+                {budgetText && (
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                    <Image
+                      src="/icons/currency-euro.svg"
+                      alt="€"
+                      width={12}
+                      height={12}
+                      style={{ display: 'block' }}
+                    />
+                    <Typography
+                      sx={{
+                        color: '#0B5A4C',
+                        fontSize: { xs: 10, sm: 14 },
+                        fontWeight: 400,
+                        lineHeight: { xs: '14px', sm: '20px' },
+                      }}
+                    >
+                      {budgetText}
+                    </Typography>
+                  </Box>
+                )}
+              </Box>
+
+              <Box
+                sx={{
+                  alignSelf: 'stretch',
+                  display: 'flex',
+                  justifyContent: 'flex-start',
+                  alignItems: 'flex-start',
+                  gap: 1,
+                  flexWrap: 'wrap',
+                }}
+              >
+                {skills.map((skill) => {
+                  const skillIcon = getSkillIcon(skill);
+                  return (
+                    <Box
+                      key={skill}
+                      sx={{
+                        px: { xs: 0.75, sm: 1 },
+                        py: { xs: 0.5, sm: 0.75 },
+                        background: '#F4F5F5',
+                        borderRadius: '6px',
+                        display: 'flex',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        gap: 0.75,
+                      }}
+                    >
+                      {skillIcon && (
+                        <Image
+                          src={skillIcon}
+                          alt={skill}
+                          width={14}
+                          height={14}
+                          style={{ borderRadius: '2px' }}
+                        />
+                      )}
+                      <Typography
+                        sx={{
+                          color: '#181B1A',
+                          fontSize: { xs: 10, sm: 12 },
+                          fontWeight: 400,
+                          lineHeight: { xs: '14px', sm: '16px' },
+                        }}
+                      >
+                        {skill}
+                      </Typography>
+                    </Box>
+                  );
+                })}
+              </Box>
+            </Box>
+          </Box>
+        </Box>
+
+        <Box
+          component={Link}
+          href={`/projects/${id}`}
+          sx={{
+            alignSelf: 'stretch',
+            px: 0.75,
+            py: 2,
+            background: 'white',
+            overflow: 'hidden',
+            borderTopRightRadius: '8px',
+            borderBottomRightRadius: '8px',
+            outline: '1px solid #E4E7E7',
+            outlineOffset: '-1px',
+            display: { xs: 'none', sm: 'inline-flex' },
+            flexDirection: 'column',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: 3,
+            textDecoration: 'none',
+            '&:hover': {
+              background: '#FAFAFA',
+            },
+          }}
+        >
+          <Box
+            sx={{
+              p: 0.75,
+              overflow: 'hidden',
+              borderRadius: '6px',
+              display: 'inline-flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              gap: 1,
+            }}
+          >
+            <Image src="/icons/chevron.svg" alt="" width={24} height={24} />
+          </Box>
         </Box>
       </Box>
     </Box>
