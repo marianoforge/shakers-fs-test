@@ -17,6 +17,7 @@ import {
 } from '@/components/projects';
 import { ErrorState, LoadingState, useToast } from '@/components/ui';
 import { useApplications, useProject, useStaticData } from '@/hooks';
+import { ApiError } from '@/lib/api';
 import { createIdResolver } from '@/lib/utils';
 
 export default function ProjectDetailPage() {
@@ -39,8 +40,12 @@ export default function ProjectDetailPage() {
         await apply(positionId);
         showToast('Aplicación enviada con éxito', 'success');
       }
-    } catch {
-      showToast('Error al procesar la solicitud', 'error');
+    } catch (error) {
+      if (error instanceof ApiError) {
+        showToast(error.message, 'error');
+      } else {
+        showToast('Error al procesar la solicitud', 'error');
+      }
     }
   };
 

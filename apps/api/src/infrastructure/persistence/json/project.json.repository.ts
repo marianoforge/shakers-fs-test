@@ -1,13 +1,15 @@
 import * as fs from 'fs';
 import * as path from 'path';
 
-import { Injectable } from '@nestjs/common';
-import { Position, Project, ProjectFilter } from '@shakers/shared';
+import { Injectable, Logger } from '@nestjs/common';
+import { Position, Project, ProjectFilter, ProjectSchema } from '@shakers/shared';
+import { z } from 'zod';
 
 import { ProjectRepositoryPort } from '@domain/ports';
 
 @Injectable()
 export class ProjectJsonRepository implements ProjectRepositoryPort {
+  private readonly logger = new Logger(ProjectJsonRepository.name);
   private projects: Project[] = [];
 
   constructor() {
@@ -17,7 +19,27 @@ export class ProjectJsonRepository implements ProjectRepositoryPort {
   private loadProjects(): void {
     const filePath = path.join(process.cwd(), 'data/projects.json');
     const data = fs.readFileSync(filePath, 'utf-8');
-    this.projects = JSON.parse(data) as Project[];
+    const rawData = JSON.parse(data);
+
+    try {
+      const ProjectsArraySchema = z.array(ProjectSchema);
+      this.projects = ProjectsArraySchema.parse(rawData);
+      this.logger.log(`Loaded ${this.projects.length} projects successfully`);
+    } catch {
+      this.logger.warn('Projects data validation failed, using unvalidated data');
+      this.projects = rawData as Project[];
+    }
+  }
+
+  private applyArrayFilter(
+    items: number[],
+    filterValues: number[],
+    operator: 'AND' | 'OR',
+  ): boolean {
+    if (operator === 'AND') {
+      return filterValues.every((value) => items.includes(value));
+    }
+    return filterValues.some((value) => items.includes(value));
   }
 
   async findAll(filter?: ProjectFilter): Promise<Project[]> {
@@ -29,10 +51,7 @@ export class ProjectJsonRepository implements ProjectRepositoryPort {
         const projectSpecialties = project.positions.flatMap(
           (position: Position) => position.specialties,
         );
-        if (op === 'AND') {
-          return filter.specialties!.every((s: number) => projectSpecialties.includes(s));
-        }
-        return filter.specialties!.some((s: number) => projectSpecialties.includes(s));
+        return this.applyArrayFilter(projectSpecialties, filter.specialties!, op);
       });
     }
 
@@ -40,10 +59,7 @@ export class ProjectJsonRepository implements ProjectRepositoryPort {
       const op = filter.skillsOp ?? 'OR';
       result = result.filter((project) => {
         const projectSkills = project.positions.flatMap((position: Position) => position.skills);
-        if (op === 'AND') {
-          return filter.skills!.every((s: number) => projectSkills.includes(s));
-        }
-        return filter.skills!.some((s: number) => projectSkills.includes(s));
+        return this.applyArrayFilter(projectSkills, filter.skills!, op);
       });
     }
 

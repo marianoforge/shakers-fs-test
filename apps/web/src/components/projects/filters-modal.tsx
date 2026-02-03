@@ -1,6 +1,6 @@
 'use client';
 
-import { StaticData } from '@shakers/shared';
+import { FilterOperator, StaticData } from '@shakers/shared';
 
 import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
@@ -14,7 +14,7 @@ import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
 import { CloseIcon, FilterChip } from '@/components/ui';
-import { FilterOperator, FilterOperators, FiltersState } from '@/hooks/use-filters';
+import { FilterOperators, FiltersState } from '@/hooks/use-filters';
 import { colors } from '@/theme';
 
 interface FiltersModalProps {

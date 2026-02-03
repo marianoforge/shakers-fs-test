@@ -2,11 +2,9 @@
 
 import { useCallback, useState } from 'react';
 
-import { ProjectFilter } from '@shakers/shared';
+import { FilterOperator, ProjectFilter } from '@shakers/shared';
 
 export type ProjectSortOrder = 'publishedAt_desc' | 'publishedAt_asc';
-
-export type FilterOperator = 'AND' | 'OR';
 
 export interface FilterOperators {
   specialties: FilterOperator;

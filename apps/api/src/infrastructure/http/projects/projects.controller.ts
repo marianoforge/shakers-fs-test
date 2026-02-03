@@ -9,10 +9,13 @@ import {
   ParseIntPipe,
   Post,
   Query,
+  UsePipes,
 } from '@nestjs/common';
-import { Position, Project, ProjectFilter } from '@shakers/shared';
+import { Position, Project, ProjectFilter, ProjectFilterSchema } from '@shakers/shared';
 
 import { ApplicationsService, ProjectsService } from '@application/services';
+
+import { ZodValidationPipe } from '../common/pipes/zod-validation.pipe';
 
 interface GetProjectsQueryDto {
   specialties?: string | string[];
@@ -38,6 +41,7 @@ export class ProjectsController {
   ) {}
 
   @Get()
+  @UsePipes(new ZodValidationPipe(ProjectFilterSchema.partial()))
   async findAll(@Query() query: GetProjectsQueryDto): Promise<Project[]> {
     const filter: ProjectFilter = {};
 

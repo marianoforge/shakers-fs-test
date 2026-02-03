@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -48,7 +48,7 @@ export function ProjectCard({
     setLogoSrc(FALLBACK_LOGO);
   };
 
-  const formatBudget = () => {
+  const budgetText = useMemo(() => {
     if (budget.hourFrom && budget.hourTo) {
       return formatHourlyRate(budget.hourFrom, budget.hourTo);
     }
@@ -56,9 +56,8 @@ export function ProjectCard({
       return formatCurrency(budget.total);
     }
     return null;
-  };
+  }, [budget.hourFrom, budget.hourTo, budget.total]);
 
-  const budgetText = formatBudget();
   const animationDelay = index * 0.05;
 
   return (

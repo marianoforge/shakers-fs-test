@@ -82,16 +82,27 @@ pnpm test:cov         # Coverage report
 
 ## Features
 
+### Funcionalidad
+
 - [x] Listado de proyectos con cards
 - [x] Modal de filtros (especialidades, skills, industria, tipo)
 - [x] Operadores AND/OR por cada filtro
 - [x] Bloque de "Filtros aplicados" con posibilidad de remover
-- [x] Ordenamiento por fecha de publicación
+- [x] Ordenamiento por fecha de publicación (toggle directo)
 - [x] Detalle del proyecto completo
 - [x] Flujo aplicar/retirar candidatura con toast
 - [x] Animación de entrada (bounce desde izquierda)
 - [x] Diseño responsive (mobile + desktop)
-- [x] Tests unitarios en backend (34 tests)
+
+### Code Quality
+
+- [x] Tests unitarios en backend (35 tests, ~95% coverage)
+- [x] Validación con Zod en API y runtime
+- [x] Exception filters globales con respuestas estructuradas
+- [x] Error handling específico en frontend
+- [x] TypeScript strict mode
+- [x] ESLint + Prettier configurados
+- [x] Husky + Commitlint para commits consistentes
 
 ## Scripts
 
@@ -120,9 +131,30 @@ Validación en runtime + inferencia de tipos. Un solo schema genera el tipo Type
 **¿Por qué MUI?**
 Componentes accesibles out-of-the-box. El `sx` prop permite colocar estilos con lógica responsive sin saltar entre archivos.
 
+## Arquitectura destacada
+
+### Backend
+
+- **Hexagonal Architecture**: Domain (ports) → Application (services) → Infrastructure (controllers, repositories)
+- **Exception Filters**: Respuestas de error estructuradas y consistentes
+- **Zod Validation**: Validación en runtime de requests y datos JSON
+- **Logging**: Logger de NestJS para debugging
+
+### Frontend
+
+- **Custom Hooks**: Separación de lógica de estado (`use-filters`, `use-applications`, `use-projects`)
+- **API Client**: Error handling con `ApiError` class para mensajes específicos
+- **Theme System**: Paleta de colores centralizada con variables CSS de Figma
+- **Performance**: `useMemo` en cálculos costosos, optimización de re-renders
+
+### Shared
+
+- **Single Source of Truth**: Types y schemas compartidos entre FE/BE
+- **Type Safety**: Zod schemas generan tipos TypeScript automáticamente
+
 ## Commits
 
-Conventional Commits: `feat(web): add filters modal`, `fix(api): handle empty results`
+Conventional Commits: `feat(web): add filters modal`, `fix(api): handle empty results`, `test(api): add unit tests`
 
 ---
 
