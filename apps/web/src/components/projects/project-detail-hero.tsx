@@ -5,12 +5,14 @@ import Image from 'next/image';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
-import { CalendarIcon, CategoryIcon, ClockIcon, UsersIcon } from '@/components/ui';
-import { formatCurrency, formatDate, formatNumber } from '@/lib/utils';
+import { CalendarIcon, ClockIcon, UsersIcon } from '@/components/ui';
+import { formatCurrency, formatDate, formatNumber, getCategoryIcon } from '@/lib/utils';
+import { colors } from '@/theme';
 
 interface ProjectDetailHeroProps {
   title: string;
   category: string;
+  categoryId: number;
   specialty: string;
   startDate: string;
   totalHours: number;
@@ -24,7 +26,7 @@ function InfoBadge({ icon, label }: { icon: React.ReactNode; label: string }) {
       sx={{
         px: 1,
         py: 0.75,
-        background: 'white',
+        background: colors.grey[0],
         borderRadius: '6px',
         display: 'flex',
         alignItems: 'center',
@@ -44,7 +46,7 @@ function InfoBadge({ icon, label }: { icon: React.ReactNode; label: string }) {
       </Box>
       <Typography
         sx={{
-          color: '#181B1A',
+          color: colors.text.grey9,
           fontSize: 12,
           fontWeight: 400,
           lineHeight: '16px',
@@ -59,18 +61,20 @@ function InfoBadge({ icon, label }: { icon: React.ReactNode; label: string }) {
 export function ProjectDetailHero({
   title,
   category,
+  categoryId,
   specialty,
   startDate,
   totalHours,
   budget,
   talentsCount,
 }: ProjectDetailHeroProps) {
+  const CategoryIconComponent = getCategoryIcon(categoryId);
   return (
     <Box
       sx={{
         px: { xs: 2, sm: 5 },
         py: { xs: 3, sm: 3 },
-        background: '#033028',
+        background: colors.green[8],
         borderRadius: '6px',
         display: 'flex',
         flexDirection: 'column',
@@ -88,7 +92,7 @@ export function ProjectDetailHero({
         <Typography
           sx={{
             flex: 1,
-            color: 'white',
+            color: colors.grey[0],
             fontSize: 24,
             fontWeight: 400,
             lineHeight: '33.6px',
@@ -101,7 +105,7 @@ export function ProjectDetailHero({
             display: { xs: 'none', sm: 'flex' },
             px: 1,
             py: 0.75,
-            background: '#EDF7F6',
+            background: colors.surface.green2,
             borderRadius: '6px',
             alignItems: 'center',
             gap: 0.75,
@@ -116,11 +120,11 @@ export function ProjectDetailHero({
               justifyContent: 'center',
             }}
           >
-            <CategoryIcon size={12} />
+            <CategoryIconComponent size={12} color={colors.text.grey9} />
           </Box>
           <Typography
             sx={{
-              color: '#181B1A',
+              color: colors.text.grey9,
               fontSize: 12,
               fontWeight: 400,
               lineHeight: '16px',
@@ -133,7 +137,7 @@ export function ProjectDetailHero({
 
       <Typography
         sx={{
-          color: 'white',
+          color: colors.grey[0],
           fontSize: 18,
           fontWeight: 400,
           lineHeight: '26px',

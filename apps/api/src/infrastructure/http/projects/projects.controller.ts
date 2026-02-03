@@ -10,7 +10,7 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
-import { Project, ProjectFilter } from '@shakers/shared';
+import { Position, Project, ProjectFilter } from '@shakers/shared';
 
 import { ApplicationsService, ProjectsService } from '@application/services';
 
@@ -93,7 +93,7 @@ export class ProjectsController {
       throw new NotFoundException(`Project with id ${id} not found`);
     }
 
-    const position = project.positions.find((p) => p.id === body.positionId);
+    const position = project.positions.find((p: Position) => p.id === body.positionId);
     if (!position) {
       throw new NotFoundException(`Position with id ${body.positionId} not found`);
     }
@@ -118,7 +118,7 @@ export class ProjectsController {
       throw new NotFoundException(`Project with id ${id} not found`);
     }
 
-    const position = project.positions.find((p) => p.id === body.positionId);
+    const position = project.positions.find((p: Position) => p.id === body.positionId);
     if (!position) {
       throw new NotFoundException(`Position with id ${body.positionId} not found`);
     }

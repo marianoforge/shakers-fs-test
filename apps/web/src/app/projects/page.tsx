@@ -45,7 +45,7 @@ export default function ProjectsPage() {
     <Box
       sx={{
         px: { xs: 2, sm: 5 },
-        py: { xs: 2, sm: 5 },
+        pb: { xs: 2, sm: 5 },
         bgcolor: 'white',
         minHeight: 'calc(100vh - 65px)',
         overflow: 'hidden',
@@ -106,7 +106,7 @@ export default function ProjectsPage() {
 
               return (
                 <ProjectCard
-                  key={project.id}
+                  key={`${project.id}-${filters.order}`}
                   id={project.id}
                   title={project.title}
                   organization={{

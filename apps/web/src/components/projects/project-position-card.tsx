@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 import { CheckIcon } from '@/components/ui';
+import { colors } from '@/theme';
 
 import type { Position } from '@shakers/shared';
 
@@ -32,9 +33,9 @@ export function ProjectPositionCard({
         width: { xs: 300, sm: 300 },
         maxWidth: '100%',
         p: 3,
-        background: 'white',
+        background: colors.grey[0],
         borderRadius: '12px',
-        outline: '1px #E4E7E7 solid',
+        outline: `1px ${colors.grey[4]} solid`,
         outlineOffset: '-1px',
         display: 'flex',
         flexDirection: 'column',
@@ -63,10 +64,10 @@ export function ProjectPositionCard({
                 justifyContent: 'center',
               }}
             >
-              <CheckIcon size={12} color="#181B1A" />
+              <CheckIcon size={12} color={colors.text.grey9} />
             </Box>
             <Typography
-              sx={{ color: '#181B1A', fontSize: 12, fontWeight: 400, lineHeight: '16px' }}
+              sx={{ color: colors.text.grey9, fontSize: 12, fontWeight: 400, lineHeight: '16px' }}
             >
               Aplicado
             </Typography>
@@ -76,7 +77,7 @@ export function ProjectPositionCard({
 
       <Typography
         sx={{
-          color: '#181B1A',
+          color: colors.text.grey9,
           fontSize: 20,
           fontWeight: 400,
           lineHeight: '28px',
@@ -90,7 +91,7 @@ export function ProjectPositionCard({
 
       <Typography
         sx={{
-          color: '#555E5C',
+          color: colors.text.grey8,
           fontSize: 14,
           fontWeight: 400,
           lineHeight: '20px',
@@ -111,17 +112,17 @@ export function ProjectPositionCard({
           mt: 2,
           py: 1,
           px: 1.5,
-          background: isApplied ? 'transparent' : '#F0FF3D',
+          background: isApplied ? 'transparent' : colors.yellow[6],
           borderRadius: '6px',
-          color: isApplied ? '#CA4810' : '#181B1A',
+          color: isApplied ? colors.text.red6 : colors.text.grey9,
           fontSize: 14,
           fontWeight: 400,
           lineHeight: '20px',
           textTransform: 'none',
-          border: isApplied ? '1px solid #CA4810' : 'none',
+          border: isApplied ? `1px solid ${colors.red[6]}` : 'none',
           '&:hover': {
             background: isApplied ? 'rgba(202, 72, 16, 0.04)' : '#e5f536',
-            border: isApplied ? '1px solid #CA4810' : 'none',
+            border: isApplied ? `1px solid ${colors.red[6]}` : 'none',
           },
           '&:disabled': {
             opacity: 0.6,

@@ -2,12 +2,10 @@
 
 import { StaticData } from '@shakers/shared';
 
-import CloseIcon from '@mui/icons-material/Close';
 import Autocomplete from '@mui/material/Autocomplete';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
-import IconButton from '@mui/material/IconButton';
 import Radio from '@mui/material/Radio';
 import { useTheme } from '@mui/material/styles';
 import TextField from '@mui/material/TextField';
@@ -15,8 +13,9 @@ import Tooltip from '@mui/material/Tooltip';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
-import { FilterChip } from '@/components/ui';
+import { CloseIcon, FilterChip } from '@/components/ui';
 import { FilterOperator, FilterOperators, FiltersState } from '@/hooks/use-filters';
+import { colors } from '@/theme';
 
 interface FiltersModalProps {
   open: boolean;
@@ -50,7 +49,7 @@ function OperatorButton({ operator, onClick }: OperatorButtonProps) {
           py: '6px',
           minHeight: 36,
           borderRadius: '6px',
-          border: '1px solid #E4E7E7',
+          border: `1px solid ${colors.grey[4]}`,
           display: 'flex',
           alignItems: 'center',
           gap: 1,
@@ -60,16 +59,16 @@ function OperatorButton({ operator, onClick }: OperatorButtonProps) {
           userSelect: 'none',
           transition: 'all 0.15s ease',
           '&:hover': {
-            borderColor: '#0B5A4C',
+            borderColor: colors.green[6],
             bgcolor: 'rgba(11, 90, 76, 0.04)',
           },
         }}
       >
         <Typography
           sx={{
-            color: '#181B1A',
+            color: colors.text.grey9,
             fontSize: 14,
-            fontWeight: 500,
+            fontWeight: 400,
             lineHeight: '20px',
             minWidth: 12,
             textAlign: 'center',
@@ -78,10 +77,22 @@ function OperatorButton({ operator, onClick }: OperatorButtonProps) {
           {label}
         </Typography>
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
-          <Box component="svg" width={12} height={12} viewBox="0 0 12 12" sx={{ color: '#555E5C' }}>
+          <Box
+            component="svg"
+            width={12}
+            height={12}
+            viewBox="0 0 12 12"
+            sx={{ color: colors.text.grey8 }}
+          >
             <path d="M3 7.5L6 4.5L9 7.5" stroke="currentColor" strokeWidth="1" fill="none" />
           </Box>
-          <Box component="svg" width={12} height={12} viewBox="0 0 12 12" sx={{ color: '#555E5C' }}>
+          <Box
+            component="svg"
+            width={12}
+            height={12}
+            viewBox="0 0 12 12"
+            sx={{ color: colors.text.grey8 }}
+          >
             <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1" fill="none" />
           </Box>
         </Box>
@@ -106,7 +117,7 @@ function FilterField({
       <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 0.75 }}>
         <Typography
           sx={{
-            color: '#181B1A',
+            color: colors.text.grey9,
             fontSize: 16,
             fontWeight: 400,
             lineHeight: '22px',
@@ -121,22 +132,49 @@ function FilterField({
   );
 }
 
+const DropdownIcon = () => (
+  <Box sx={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
+    <Box
+      component="svg"
+      width={12}
+      height={12}
+      viewBox="0 0 12 12"
+      sx={{ color: colors.text.grey8 }}
+    >
+      <path d="M3 7.5L6 4.5L9 7.5" stroke="currentColor" strokeWidth="1" fill="none" />
+    </Box>
+    <Box
+      component="svg"
+      width={12}
+      height={12}
+      viewBox="0 0 12 12"
+      sx={{ color: colors.text.grey8 }}
+    >
+      <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1" fill="none" />
+    </Box>
+  </Box>
+);
+
 const autocompleteInputSx = {
   '& .MuiOutlinedInput-root': {
     py: '6px',
-    px: '12px',
+    pl: '12px',
+    pr: '12px',
     minHeight: 36,
     borderRadius: '6px',
-    '& fieldset': { borderColor: '#E4E7E7' },
-    '&:hover fieldset': { borderColor: '#E4E7E7' },
-    '&.Mui-focused fieldset': { borderColor: '#0B5A4C', borderWidth: 1 },
+    '& fieldset': { borderColor: colors.grey[4] },
+    '&:hover fieldset': { borderColor: colors.grey[4] },
+    '&.Mui-focused fieldset': { borderColor: colors.green[6], borderWidth: 1 },
+  },
+  '& .MuiAutocomplete-endAdornment': {
+    right: '12px',
   },
   '& .MuiInputBase-input': {
     fontSize: 14,
-    lineHeight: '24px',
-    height: 24,
+    lineHeight: '20px',
+    height: 20,
     p: '0 !important',
-    '&::placeholder': { color: '#AEB7B4', opacity: 1 },
+    '&::placeholder': { color: colors.text.grey6, opacity: 1 },
   },
   '& .MuiAutocomplete-tag': {
     m: 0,
@@ -204,14 +242,20 @@ export function FiltersModal({
       fullScreen={isMobile}
       PaperProps={{
         sx: {
-          borderRadius: isMobile ? 0 : '6px',
+          borderRadius: '6px',
           ...(isMobile ? { px: 2, pt: 5, pb: 5 } : { p: 5 }),
           position: 'relative',
           overflow: 'auto',
+          ...(isMobile && {
+            m: 0,
+            maxHeight: '100%',
+            maxWidth: '100%',
+            width: '100%',
+          }),
         },
       }}
     >
-      <IconButton
+      <Box
         onClick={onClose}
         sx={{
           position: 'absolute',
@@ -219,15 +263,29 @@ export function FiltersModal({
           top: 8,
           p: 0.75,
           borderRadius: '6px',
+          cursor: 'pointer',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
           '&:hover': { bgcolor: 'rgba(3, 48, 40, 0.04)' },
         }}
       >
-        <CloseIcon sx={{ fontSize: 32, color: '#033028' }} />
-      </IconButton>
+        <Box
+          sx={{
+            width: 32,
+            height: 32,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <CloseIcon size={16} color={colors.text.green8} />
+        </Box>
+      </Box>
 
       <Typography
         sx={{
-          color: '#0D0D0D',
+          color: colors.primitives.black,
           fontSize: 24,
           fontWeight: 400,
           lineHeight: '33.6px',
@@ -254,6 +312,7 @@ export function FiltersModal({
                 newValue.map((v) => v.id),
               );
             }}
+            popupIcon={<DropdownIcon />}
             renderInput={(params) => (
               <TextField {...params} placeholder="Busca y añade" sx={autocompleteInputSx} />
             )}
@@ -285,6 +344,7 @@ export function FiltersModal({
                 newValue.map((v) => v.id),
               );
             }}
+            popupIcon={<DropdownIcon />}
             renderInput={(params) => (
               <TextField {...params} placeholder="Busca y añade" sx={autocompleteInputSx} />
             )}
@@ -316,6 +376,7 @@ export function FiltersModal({
                 newValue.map((v) => v.id),
               );
             }}
+            popupIcon={<DropdownIcon />}
             renderInput={(params) => (
               <TextField {...params} placeholder="Busca y añade" sx={autocompleteInputSx} />
             )}
@@ -347,6 +408,7 @@ export function FiltersModal({
                 newValue.map((v) => v.id),
               );
             }}
+            popupIcon={<DropdownIcon />}
             renderInput={(params) => (
               <TextField {...params} placeholder="Busca y añade" sx={autocompleteInputSx} />
             )}
@@ -365,7 +427,7 @@ export function FiltersModal({
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
           <Typography
             sx={{
-              color: '#181B1A',
+              color: colors.text.grey9,
               fontSize: 16,
               fontWeight: 400,
               lineHeight: '22px',
@@ -390,13 +452,13 @@ export function FiltersModal({
                   p: 0,
                   width: 20,
                   height: 20,
-                  color: '#E4E7E7',
-                  '&.Mui-checked': { color: '#0B5A4C' },
+                  color: colors.grey[4],
+                  '&.Mui-checked': { color: colors.green[6] },
                 }}
               />
               <Typography
                 sx={{
-                  color: '#181B1A',
+                  color: colors.text.grey9,
                   fontSize: 14,
                   fontWeight: 400,
                   lineHeight: '20px',
@@ -421,13 +483,13 @@ export function FiltersModal({
                   p: 0,
                   width: 20,
                   height: 20,
-                  color: '#E4E7E7',
-                  '&.Mui-checked': { color: '#0B5A4C' },
+                  color: colors.grey[4],
+                  '&.Mui-checked': { color: colors.green[6] },
                 }}
               />
               <Typography
                 sx={{
-                  color: '#181B1A',
+                  color: colors.text.grey9,
                   fontSize: 14,
                   fontWeight: 400,
                   lineHeight: '20px',
@@ -456,8 +518,8 @@ export function FiltersModal({
                   py: 1.5,
                   px: 2,
                   borderRadius: '6px',
-                  bgcolor: '#033028',
-                  color: 'white',
+                  bgcolor: colors.green[8],
+                  color: colors.grey[0],
                   fontSize: 16,
                   fontWeight: 400,
                   lineHeight: '22px',
@@ -474,7 +536,7 @@ export function FiltersModal({
                   py: 1.5,
                   px: 2,
                   borderRadius: '6px',
-                  color: '#CA4810',
+                  color: colors.text.red6,
                   fontSize: 16,
                   fontWeight: 400,
                   lineHeight: '22px',
@@ -494,7 +556,7 @@ export function FiltersModal({
                   py: 1.5,
                   px: 2,
                   borderRadius: '6px',
-                  color: '#CA4810',
+                  color: colors.text.red6,
                   fontSize: 16,
                   fontWeight: 400,
                   lineHeight: '22px',
@@ -511,8 +573,8 @@ export function FiltersModal({
                   py: 1.5,
                   px: 2,
                   borderRadius: '6px',
-                  bgcolor: '#033028',
-                  color: 'white',
+                  bgcolor: colors.green[8],
+                  color: colors.grey[0],
                   fontSize: 16,
                   fontWeight: 400,
                   lineHeight: '22px',

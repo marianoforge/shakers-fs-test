@@ -7,8 +7,11 @@ Prueba técnica Full Stack: landing de proyectos con filtros, detalle y flujo de
 ```bash
 # Requisitos: Node >= 21, pnpm >= 9
 
-pnpm install
+pnpm install  # Builda automáticamente @shakers/shared
 pnpm dev
+
+# Nota: Es normal ver errores de TypeScript del API durante los primeros segundos
+# mientras @shakers/shared se builda. Desaparecen automáticamente.
 ```
 
 - **Web**: http://localhost:3000

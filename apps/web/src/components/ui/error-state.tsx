@@ -4,6 +4,8 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
+import { colors } from '@/theme';
+
 interface ErrorStateProps {
   message?: string;
   onRetry?: () => void;
@@ -22,14 +24,14 @@ export function ErrorState({
         justifyContent: 'center',
         py: 8,
         gap: 2,
-        bgcolor: '#FDF5F2',
+        bgcolor: colors.surface.error,
         borderRadius: '8px',
         px: 4,
       }}
     >
       <Typography
         sx={{
-          color: '#792906',
+          color: colors.text.red8,
           fontSize: 14,
           fontWeight: 400,
           textAlign: 'center',
@@ -42,15 +44,15 @@ export function ErrorState({
           variant="outlined"
           onClick={onRetry}
           sx={{
-            color: '#033028',
-            borderColor: '#033028',
+            color: colors.text.green8,
+            borderColor: colors.green[8],
             fontSize: 12,
             fontWeight: 400,
             px: 2,
             py: 0.75,
-            borderRadius: 1.5,
+            borderRadius: 0.75,
             '&:hover': {
-              borderColor: '#033028',
+              borderColor: colors.green[8],
               bgcolor: 'rgba(3, 48, 40, 0.04)',
             },
           }}

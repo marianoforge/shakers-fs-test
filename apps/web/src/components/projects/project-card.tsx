@@ -10,6 +10,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 import { formatCurrency, formatHourlyRate, getSkillIcon } from '@/lib/utils';
+import { colors } from '@/theme';
 
 const FALLBACK_LOGO = '/logos/logos_brand.png';
 
@@ -82,21 +83,21 @@ export function ProjectCard({
           sx={{
             height: 22,
             px: 0.75,
-            py: 0.5,
-            bgcolor: '#EDF7F6',
+            py: 0.75,
+            bgcolor: colors.surface.green2,
             borderRadius: '6px',
             display: 'flex',
             alignItems: 'center',
             gap: 0.75,
           }}
         >
-          <EuroIcon sx={{ fontSize: 14, color: '#181B1A' }} />
+          <EuroIcon sx={{ fontSize: 14, color: colors.text.grey9 }} />
           <Typography
             sx={{
-              color: '#033028',
-              fontSize: 10,
+              color: colors.text.green8,
+              fontSize: 12,
               fontWeight: 400,
-              lineHeight: '14px',
+              lineHeight: '16px',
             }}
           >
             ¡Gana 1500€ por referir!
@@ -118,11 +119,11 @@ export function ProjectCard({
             p: { xs: 1.5, sm: 3 },
             background: 'white',
             overflow: 'hidden',
-            borderTopLeftRadius: '8px',
-            borderBottomLeftRadius: '8px',
-            borderTopRightRadius: { xs: '8px', sm: 0 },
-            borderBottomRightRadius: { xs: '8px', sm: 0 },
-            outline: '1px solid #E4E7E7',
+            borderTopLeftRadius: { xs: '6px', sm: '8px' },
+            borderBottomLeftRadius: { xs: '6px', sm: '8px' },
+            borderTopRightRadius: { xs: '6px', sm: 0 },
+            borderBottomRightRadius: { xs: '6px', sm: 0 },
+            outline: `1px solid ${colors.grey[4]}`,
             outlineOffset: '-1px',
             display: 'flex',
             flexDirection: 'column',
@@ -131,7 +132,7 @@ export function ProjectCard({
             gap: { xs: 1.5, sm: 3 },
             textDecoration: 'none',
             '&:hover': {
-              background: '#FAFAFA',
+              background: 'rgba(244, 245, 245, 0.5)',
             },
           }}
         >
@@ -177,15 +178,13 @@ export function ProjectCard({
                 sx={{
                   width: { xs: 48, sm: 82 },
                   textAlign: 'center',
-                  color: '#AEB7B4',
-                  fontSize: { xs: 10, sm: 12 },
+                  color: colors.text.grey6,
+                  fontSize: 12,
                   fontWeight: 400,
-                  lineHeight: { xs: '14px', sm: '16px' },
-                  wordBreak: 'break-word',
-                  display: '-webkit-box',
-                  WebkitLineClamp: 2,
-                  WebkitBoxOrient: 'vertical',
+                  lineHeight: '16px',
                   overflow: 'hidden',
+                  textOverflow: 'ellipsis',
+                  whiteSpace: 'nowrap',
                 }}
               >
                 {organization.name}
@@ -200,7 +199,7 @@ export function ProjectCard({
                 flexDirection: 'column',
                 justifyContent: 'flex-start',
                 alignItems: 'flex-start',
-                gap: { xs: 0.75, sm: 1.5 },
+                gap: 1.5,
               }}
             >
               <Box
@@ -216,10 +215,10 @@ export function ProjectCard({
                   sx={{
                     flex: '1 1 0',
                     alignSelf: 'stretch',
-                    color: '#181B1A',
-                    fontSize: { xs: 14, sm: 18 },
+                    color: colors.text.grey9,
+                    fontSize: 18,
                     fontWeight: 400,
-                    lineHeight: { xs: '20px', sm: '26px' },
+                    lineHeight: '26px',
                   }}
                 >
                   {title}
@@ -232,16 +231,16 @@ export function ProjectCard({
                   display: 'flex',
                   justifyContent: 'flex-start',
                   alignItems: 'center',
-                  gap: { xs: 0.5, sm: 1 },
+                  gap: 1,
                   flexWrap: 'wrap',
                 }}
               >
                 <Typography
                   sx={{
-                    color: '#0B5A4C',
-                    fontSize: { xs: 10, sm: 14 },
+                    color: colors.text.green6,
+                    fontSize: 14,
                     fontWeight: 400,
-                    lineHeight: { xs: '14px', sm: '20px' },
+                    lineHeight: '20px',
                   }}
                 >
                   {category}
@@ -250,7 +249,7 @@ export function ProjectCard({
                 {subcategory && (
                   <Typography
                     sx={{
-                      color: '#0B5A4C',
+                      color: colors.text.green6,
                       fontSize: { xs: 10, sm: 14 },
                       fontWeight: 400,
                       lineHeight: { xs: '14px', sm: '20px' },
@@ -261,17 +260,17 @@ export function ProjectCard({
                   </Typography>
                 )}
                 {budgetText && (
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.75 }}>
                     <Image
                       src="/icons/currency-euro.svg"
                       alt="€"
-                      width={12}
-                      height={12}
+                      width={14}
+                      height={14}
                       style={{ display: 'block' }}
                     />
                     <Typography
                       sx={{
-                        color: '#0B5A4C',
+                        color: colors.text.green6,
                         fontSize: { xs: 10, sm: 14 },
                         fontWeight: 400,
                         lineHeight: { xs: '14px', sm: '20px' },
@@ -300,8 +299,8 @@ export function ProjectCard({
                       key={skill}
                       sx={{
                         px: { xs: 0.75, sm: 1 },
-                        py: { xs: 0.5, sm: 0.75 },
-                        background: '#F4F5F5',
+                        py: { xs: 0.75, sm: 0.75 },
+                        background: colors.grey[2],
                         borderRadius: '6px',
                         display: 'flex',
                         justifyContent: 'center',
@@ -320,10 +319,10 @@ export function ProjectCard({
                       )}
                       <Typography
                         sx={{
-                          color: '#181B1A',
-                          fontSize: { xs: 10, sm: 12 },
+                          color: colors.text.grey9,
+                          fontSize: 12,
                           fontWeight: 400,
-                          lineHeight: { xs: '14px', sm: '16px' },
+                          lineHeight: '16px',
                         }}
                       >
                         {skill}
@@ -347,7 +346,7 @@ export function ProjectCard({
             overflow: 'hidden',
             borderTopRightRadius: '8px',
             borderBottomRightRadius: '8px',
-            outline: '1px solid #E4E7E7',
+            outline: `1px solid ${colors.grey[4]}`,
             outlineOffset: '-1px',
             display: { xs: 'none', sm: 'inline-flex' },
             flexDirection: 'column',
@@ -356,7 +355,7 @@ export function ProjectCard({
             gap: 3,
             textDecoration: 'none',
             '&:hover': {
-              background: '#FAFAFA',
+              background: 'rgba(244, 245, 245, 0.5)',
             },
           }}
         >

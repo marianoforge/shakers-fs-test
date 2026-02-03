@@ -7,6 +7,7 @@ import Collapse from '@mui/material/Collapse';
 import Typography from '@mui/material/Typography';
 
 import { ChevronDownIcon } from '@/components/ui';
+import { colors } from '@/theme';
 
 import type { Faq } from '@shakers/shared';
 
@@ -21,8 +22,8 @@ function FaqItem({ faq, isOpen, onToggle }: { faq: Faq; isOpen: boolean; onToggl
         borderRadius: '6px',
         overflow: 'hidden',
         ...(isOpen
-          ? { background: '#EDF7F6' }
-          : { outline: '2px #EDF7F6 solid', outlineOffset: '-2px' }),
+          ? { background: colors.surface.green2 }
+          : { outline: `2px ${colors.surface.green2} solid`, outlineOffset: '-2px' }),
       }}
     >
       <Box
@@ -41,7 +42,7 @@ function FaqItem({ faq, isOpen, onToggle }: { faq: Faq; isOpen: boolean; onToggl
         <Typography
           sx={{
             flex: 1,
-            color: '#181B1A',
+            color: colors.text.grey9,
             fontSize: 12,
             fontWeight: 400,
             fontStyle: isOpen ? 'italic' : 'normal',
@@ -68,7 +69,7 @@ function FaqItem({ faq, isOpen, onToggle }: { faq: Faq; isOpen: boolean; onToggl
         <Box sx={{ px: 2, pb: 1.5 }}>
           <Typography
             sx={{
-              color: '#555E5C',
+              color: colors.text.grey8,
               fontSize: 12,
               fontWeight: 400,
               lineHeight: '16px',
@@ -93,7 +94,7 @@ export function ProjectFaqs({ faqs }: ProjectFaqsProps) {
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
       <Typography
         sx={{
-          color: '#033028',
+          color: colors.text.green8,
           fontSize: 18,
           fontWeight: 400,
           lineHeight: '26px',

@@ -6,6 +6,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
 import { ChevronLeftIcon } from '@/components/ui';
+import { colors } from '@/theme';
 
 interface ProjectDetailBreadcrumbProps {
   projectTitle: string;
@@ -52,7 +53,7 @@ export function ProjectDetailBreadcrumb({ projectTitle }: ProjectDetailBreadcrum
           </Box>
           <Typography
             sx={{
-              color: '#033028',
+              color: colors.text.green8,
               fontSize: 12,
               fontWeight: 400,
               lineHeight: '16px',
@@ -67,10 +68,10 @@ export function ProjectDetailBreadcrumb({ projectTitle }: ProjectDetailBreadcrum
           <Box sx={{ py: 0.5, px: 0.75, display: 'flex', alignItems: 'center', gap: 0.75 }}>
             <Typography
               sx={{
-                color: '#555E5C',
-                fontSize: { xs: 10, sm: 12 },
+                color: colors.text.grey8,
+                fontSize: { xs: 12, sm: 12 },
                 fontWeight: 400,
-                lineHeight: { xs: '14px', sm: '16px' },
+                lineHeight: { xs: '16px', sm: '16px' },
               }}
             >
               Buscador Proyectos
@@ -88,10 +89,10 @@ export function ProjectDetailBreadcrumb({ projectTitle }: ProjectDetailBreadcrum
           >
             <Typography
               sx={{
-                color: '#555E5C',
-                fontSize: { xs: 10, sm: 12 },
+                color: colors.text.grey8,
+                fontSize: { xs: 12, sm: 12 },
                 fontWeight: 400,
-                lineHeight: { xs: '14px', sm: '16px' },
+                lineHeight: { xs: '16px', sm: '16px' },
               }}
             >
               /
@@ -99,11 +100,11 @@ export function ProjectDetailBreadcrumb({ projectTitle }: ProjectDetailBreadcrum
             <Typography
               sx={{
                 flex: 1,
-                color: '#181B1A',
-                fontSize: { xs: 10, sm: 12 },
+                color: colors.text.grey9,
+                fontSize: { xs: 12, sm: 12 },
                 fontStyle: 'italic',
                 fontWeight: 700,
-                lineHeight: { xs: '14px', sm: '16px' },
+                lineHeight: { xs: '16px', sm: '16px' },
                 maxWidth: { xs: 'none', sm: 400 },
                 overflow: 'hidden',
                 textOverflow: 'ellipsis',

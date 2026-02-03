@@ -4,6 +4,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
+import { colors } from '@/theme';
+
 interface FilterChipProps {
   label: string;
   onDelete?: () => void;
@@ -14,10 +16,9 @@ export function FilterChip({ label, onDelete }: FilterChipProps) {
     <Box
       sx={{
         height: 22,
-        pl: 0.75,
-        pr: 0.75,
+        px: 0.75,
         py: 0.5,
-        bgcolor: '#EDF7F6',
+        bgcolor: colors.surface.green2,
         borderRadius: '6px',
         display: 'flex',
         alignItems: 'center',
@@ -26,7 +27,7 @@ export function FilterChip({ label, onDelete }: FilterChipProps) {
     >
       <Typography
         sx={{
-          color: '#033028',
+          color: colors.text.green8,
           fontSize: 10,
           fontWeight: 400,
           lineHeight: '14px',
@@ -41,7 +42,7 @@ export function FilterChip({ label, onDelete }: FilterChipProps) {
           sx={{
             width: 14,
             height: 14,
-            bgcolor: '#033028',
+            bgcolor: colors.green[8],
             borderRadius: '2px',
             display: 'flex',
             alignItems: 'center',
@@ -50,7 +51,7 @@ export function FilterChip({ label, onDelete }: FilterChipProps) {
             flexShrink: 0,
           }}
         >
-          <CloseIcon sx={{ fontSize: 10, color: 'white' }} />
+          <CloseIcon sx={{ fontSize: 10, color: colors.grey[0] }} />
         </Box>
       )}
     </Box>

@@ -9,6 +9,9 @@ import '@/styles/animations.css';
 export const metadata: Metadata = {
   title: 'Shakers - Buscar Proyectos',
   description: 'Encuentra y aplica a proyectos que se ajusten a tus habilidades',
+  icons: {
+    icon: '/favicon.svg',
+  },
 };
 
 interface RootLayoutProps {

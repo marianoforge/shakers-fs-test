@@ -3,6 +3,8 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
+import { colors } from '@/theme';
+
 interface EmptyStateProps {
   message?: string;
 }
@@ -21,7 +23,7 @@ export function EmptyState({ message = 'No se encontraron proyectos' }: EmptySta
     >
       <Typography
         sx={{
-          color: '#AEB7B4',
+          color: colors.text.grey6,
           fontSize: 14,
           fontWeight: 400,
           textAlign: 'center',

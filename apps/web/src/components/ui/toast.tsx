@@ -8,6 +8,8 @@ import { useTheme } from '@mui/material/styles';
 import Typography from '@mui/material/Typography';
 import useMediaQuery from '@mui/material/useMediaQuery';
 
+import { colors } from '@/theme';
+
 type ToastType = 'success' | 'error' | 'info';
 
 interface ToastState {
@@ -51,12 +53,12 @@ export function ToastProvider({ children }: { children: React.ReactNode }) {
   const getStyles = (type: ToastType) => {
     switch (type) {
       case 'success':
-        return { background: '#EDF7F6', color: '#033028' };
+        return { background: colors.surface.green2, color: colors.text.green8 };
       case 'error':
-        return { background: '#FFF0ED', color: '#CA4810' };
+        return { background: colors.surface.error, color: colors.text.red6 };
       case 'info':
       default:
-        return { background: '#F4F5F5', color: '#181B1A' };
+        return { background: colors.grey[2], color: colors.text.grey9 };
     }
   };
 

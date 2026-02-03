@@ -21,7 +21,7 @@ import { createIdResolver } from '@/lib/utils';
 
 export default function ProjectDetailPage() {
   const params = useParams();
-  const projectId = parseInt(params.id as string, 10);
+  const projectId = parseInt(params['id'] as string, 10);
   const { showToast } = useToast();
 
   const { data: project, isLoading, isError, error, refetch } = useProject(projectId);
@@ -92,6 +92,7 @@ export default function ProjectDetailPage() {
           <ProjectDetailHero
             title={project.title}
             category={categoryName}
+            categoryId={project.category}
             specialty={primarySpecialty}
             startDate={project.startDate}
             totalHours={project.totalHours}
@@ -100,8 +101,8 @@ export default function ProjectDetailPage() {
           />
         </Box>
 
-        <Box sx={{ mt: { xs: 5, sm: 5 }, display: 'flex', gap: { xs: 5, sm: 8 } }}>
-          <Box sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: { xs: 5, sm: 5 } }}>
+        <Box sx={{ mt: { xs: 5, sm: 5 } }}>
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 5 }}>
             <ProjectDescription description={project.description} goals={project.goals} />
             <ProjectFaqs faqs={project.faqs} />
           </Box>
@@ -109,14 +110,27 @@ export default function ProjectDetailPage() {
 
         <Box
           sx={{
-            mt: { xs: 3, sm: 8 },
+            mt: 8,
             display: 'flex',
             flexDirection: { xs: 'column', md: 'row' },
-            gap: { xs: 8, sm: 8 },
+            gap: 8,
           }}
         >
+          <Box sx={{ order: { xs: 2, md: 1 } }}>
+            <ProjectOwnerCard
+              name={project.projectLeader.name}
+              lastName={project.projectLeader.lastName}
+              organization={{
+                name: project.organization.name,
+                logo: project.organization.logo ?? '/logos/logos_brand.png',
+              }}
+            />
+          </Box>
+
           {project.positions.length > 0 && (
-            <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
+            <Box
+              sx={{ display: 'flex', flexDirection: 'column', gap: 1.5, order: { xs: 1, md: 2 } }}
+            >
               <Typography
                 sx={{
                   color: '#033028',
@@ -152,15 +166,6 @@ export default function ProjectDetailPage() {
               </Box>
             </Box>
           )}
-
-          <ProjectOwnerCard
-            name={project.projectLeader.name}
-            lastName={project.projectLeader.lastName}
-            organization={{
-              name: project.organization.name,
-              logo: project.organization.logo ?? '/logos/logos_brand.png',
-            }}
-          />
         </Box>
       </Box>
     </Box>

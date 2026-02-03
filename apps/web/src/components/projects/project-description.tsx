@@ -3,6 +3,8 @@
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
+import { colors } from '@/theme';
+
 interface ProjectDescriptionProps {
   description: string;
   goals: string[];
@@ -10,11 +12,11 @@ interface ProjectDescriptionProps {
 
 export function ProjectDescription({ description, goals }: ProjectDescriptionProps) {
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: { xs: 3, sm: 3 } }}>
+    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3 }}>
       <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
         <Typography
           sx={{
-            color: '#033028',
+            color: colors.text.green8,
             fontSize: 18,
             fontWeight: 400,
             lineHeight: '26px',
@@ -24,7 +26,7 @@ export function ProjectDescription({ description, goals }: ProjectDescriptionPro
         </Typography>
         <Typography
           sx={{
-            color: '#555E5C',
+            color: colors.text.grey8,
             fontSize: 14,
             fontWeight: 400,
             lineHeight: '20px',
@@ -38,7 +40,7 @@ export function ProjectDescription({ description, goals }: ProjectDescriptionPro
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
           <Typography
             sx={{
-              color: '#033028',
+              color: colors.text.green8,
               fontSize: 16,
               fontWeight: 400,
               lineHeight: '22px',
@@ -59,7 +61,7 @@ export function ProjectDescription({ description, goals }: ProjectDescriptionPro
                 component="li"
                 key={index}
                 sx={{
-                  color: '#555E5C',
+                  color: colors.text.grey8,
                   fontSize: 14,
                   fontWeight: 400,
                   lineHeight: '20px',

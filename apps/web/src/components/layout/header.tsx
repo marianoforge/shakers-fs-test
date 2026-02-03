@@ -6,16 +6,20 @@ import Link from 'next/link';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
+import { colors } from '@/theme';
+
 export function Header() {
   return (
     <Box
       component="header"
       sx={{
-        bgcolor: 'white',
+        bgcolor: { xs: 'rgba(255, 255, 255, 0.80)', sm: colors.grey[0] },
+        backdropFilter: { xs: 'blur(5px)', sm: 'none' },
         borderBottom: '1px solid',
-        borderColor: '#E4E7E7',
-        py: { xs: 1.5, sm: 2.5 },
-        px: { xs: 1.5, sm: 5 },
+        borderColor: colors.grey[4],
+        py: { xs: 2.5, sm: 2.5 },
+        pl: { xs: 1.5, sm: 5 },
+        pr: { xs: 3, sm: 5 },
       }}
     >
       <Box
@@ -57,13 +61,15 @@ export function Header() {
                 justifyContent: 'center',
               }}
             >
-              <Typography sx={{ color: '#181B1A', fontSize: 8, fontWeight: 700 }}>S</Typography>
+              <Typography sx={{ color: colors.text.grey9, fontSize: 8, fontWeight: 700 }}>
+                S
+              </Typography>
             </Box>
           </Box>
           <Link href="/projects" style={{ textDecoration: 'none' }}>
             <Typography
               sx={{
-                color: '#0D0D0D',
+                color: colors.primitives.black,
                 fontSize: { xs: 14, sm: 18 },
                 fontWeight: 400,
                 lineHeight: { xs: '20px', sm: '26px' },

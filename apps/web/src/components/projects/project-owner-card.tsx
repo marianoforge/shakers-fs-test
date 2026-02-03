@@ -7,6 +7,8 @@ import Image from 'next/image';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 
+import { colors } from '@/theme';
+
 interface ProjectOwnerCardProps {
   name: string;
   lastName: string;
@@ -24,7 +26,7 @@ export function ProjectOwnerCard({ name, lastName, organization }: ProjectOwnerC
     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1.5 }}>
       <Typography
         sx={{
-          color: '#033028',
+          color: colors.text.green8,
           fontSize: 18,
           fontWeight: 400,
           lineHeight: '26px',
@@ -37,9 +39,9 @@ export function ProjectOwnerCard({ name, lastName, organization }: ProjectOwnerC
           width: { xs: 300, sm: 300 },
           maxWidth: '100%',
           p: 3,
-          background: 'white',
+          background: colors.grey[0],
           borderRadius: '12px',
-          outline: '1px #E4E7E7 solid',
+          outline: `1px ${colors.grey[4]} solid`,
           outlineOffset: '-1px',
           display: 'flex',
           flexDirection: 'column',
@@ -68,7 +70,7 @@ export function ProjectOwnerCard({ name, lastName, organization }: ProjectOwnerC
           </Box>
           <Typography
             sx={{
-              color: '#181B1A',
+              color: colors.text.grey9,
               fontSize: 16,
               fontWeight: 400,
               lineHeight: '22px',
@@ -99,7 +101,7 @@ export function ProjectOwnerCard({ name, lastName, organization }: ProjectOwnerC
         <Box>
           <Typography
             sx={{
-              color: '#181B1A',
+              color: colors.text.grey9,
               fontSize: 20,
               fontWeight: 400,
               lineHeight: '28px',
@@ -109,7 +111,7 @@ export function ProjectOwnerCard({ name, lastName, organization }: ProjectOwnerC
           </Typography>
           <Typography
             sx={{
-              color: '#555E5C',
+              color: colors.text.grey8,
               fontSize: 16,
               fontWeight: 400,
               lineHeight: '22px',

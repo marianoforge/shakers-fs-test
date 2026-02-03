@@ -10,6 +10,7 @@ import Collapse from '@mui/material/Collapse';
 import Typography from '@mui/material/Typography';
 
 import { FiltersState } from '@/hooks/use-filters';
+import { colors } from '@/theme';
 
 interface AppliedFiltersProps {
   filters: FiltersState;
@@ -30,8 +31,8 @@ function FilterChipWhite({ label, onDelete }: { label: string; onDelete: () => v
     <Box
       sx={{
         px: { xs: 0.75, sm: 1 },
-        py: { xs: 0.5, sm: 0.75 },
-        bgcolor: 'white',
+        py: { xs: 0.75, sm: 0.75 },
+        bgcolor: colors.grey[0],
         borderRadius: '6px',
         display: 'flex',
         alignItems: 'center',
@@ -40,10 +41,10 @@ function FilterChipWhite({ label, onDelete }: { label: string; onDelete: () => v
     >
       <Typography
         sx={{
-          color: '#033028',
-          fontSize: { xs: 10, sm: 12 },
+          color: colors.text.green8,
+          fontSize: { xs: 12, sm: 12 },
           fontWeight: 400,
-          lineHeight: { xs: '14px', sm: '16px' },
+          lineHeight: { xs: '16px', sm: '16px' },
         }}
       >
         {label}
@@ -59,7 +60,7 @@ function FilterChipWhite({ label, onDelete }: { label: string; onDelete: () => v
           cursor: 'pointer',
         }}
       >
-        <CloseIcon sx={{ fontSize: { xs: 10, sm: 12 }, color: '#033028' }} />
+        <CloseIcon sx={{ fontSize: { xs: 10, sm: 12 }, color: colors.text.green8 }} />
       </Box>
     </Box>
   );
@@ -85,7 +86,7 @@ function FilterGroupRow({
     >
       <Typography
         sx={{
-          color: '#555E5C',
+          color: colors.text.grey8,
           fontSize: { xs: 12, sm: 14 },
           fontWeight: 400,
           lineHeight: { xs: '16px', sm: '20px' },
@@ -98,7 +99,7 @@ function FilterGroupRow({
           {index > 0 && (
             <Typography
               sx={{
-                color: '#555E5C',
+                color: colors.text.grey8,
                 fontSize: { xs: 12, sm: 14 },
                 fontWeight: 400,
                 lineHeight: { xs: '16px', sm: '20px' },
@@ -185,7 +186,7 @@ export function AppliedFilters({ filters, staticData, onRemoveFilter }: AppliedF
         mt: { xs: 2, sm: 3 },
         px: { xs: 1.5, sm: 2 },
         py: { xs: 1, sm: 1.5 },
-        bgcolor: '#EDF7F6',
+        bgcolor: colors.surface.green2,
         borderRadius: '6px',
         display: 'flex',
         flexDirection: 'column',
@@ -205,7 +206,7 @@ export function AppliedFilters({ filters, staticData, onRemoveFilter }: AppliedF
       >
         <Typography
           sx={{
-            color: '#181B1A',
+            color: colors.text.grey9,
             fontSize: { xs: 14, sm: 16 },
             fontStyle: 'italic',
             fontWeight: 400,
@@ -220,7 +221,7 @@ export function AppliedFilters({ filters, staticData, onRemoveFilter }: AppliedF
           height={20}
           viewBox="0 0 20 20"
           sx={{
-            color: '#181B1A',
+            color: colors.text.grey9,
             transform: isExpanded ? 'rotate(180deg)' : 'rotate(0deg)',
             transition: 'transform 0.2s ease',
           }}

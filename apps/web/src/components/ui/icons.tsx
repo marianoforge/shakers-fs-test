@@ -123,7 +123,7 @@ export function CloseIcon({ size = 10, color = '#181B1A' }: IconProps) {
       <path
         d="M1 1L9 9M9 1L1 9"
         stroke={color}
-        strokeWidth="1.5"
+        strokeWidth="1"
         strokeLinecap="round"
         strokeLinejoin="round"
       />

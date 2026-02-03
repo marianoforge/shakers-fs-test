@@ -30,9 +30,9 @@ export class ProjectJsonRepository implements ProjectRepositoryPort {
           (position: Position) => position.specialties,
         );
         if (op === 'AND') {
-          return filter.specialties!.every((s) => projectSpecialties.includes(s));
+          return filter.specialties!.every((s: number) => projectSpecialties.includes(s));
         }
-        return filter.specialties!.some((s) => projectSpecialties.includes(s));
+        return filter.specialties!.some((s: number) => projectSpecialties.includes(s));
       });
     }
 
@@ -41,9 +41,9 @@ export class ProjectJsonRepository implements ProjectRepositoryPort {
       result = result.filter((project) => {
         const projectSkills = project.positions.flatMap((position: Position) => position.skills);
         if (op === 'AND') {
-          return filter.skills!.every((s) => projectSkills.includes(s));
+          return filter.skills!.every((s: number) => projectSkills.includes(s));
         }
-        return filter.skills!.some((s) => projectSkills.includes(s));
+        return filter.skills!.some((s: number) => projectSkills.includes(s));
       });
     }
 

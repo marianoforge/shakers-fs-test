@@ -1,4 +1,4 @@
-export const palette = {
+export const colors = {
   grey: {
     0: '#FFFFFF',
     2: '#F4F5F5',
@@ -20,11 +20,6 @@ export const palette = {
     6: '#CA4810',
     8: '#792906',
   },
-  surface: {
-    grey0: '#FFFFFF',
-    green2: '#EDF7F6',
-    error: '#FDF5F2',
-  },
   text: {
     grey0: '#FFFFFF',
     grey6: '#AEB7B4',
@@ -35,6 +30,13 @@ export const palette = {
     red6: '#CA4810',
     red8: '#792906',
   },
-  white: '#FFFFFF',
-  black: '#0D0D0D',
+  surface: {
+    grey0: '#FFFFFF',
+    green2: '#EDF7F6',
+    error: '#FDF5F2',
+  },
+  primitives: {
+    black: '#0D0D0D',
+    white: '#FFFFFF',
+  },
 } as const;
