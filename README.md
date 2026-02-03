@@ -7,7 +7,7 @@ Prueba técnica Full Stack: landing de proyectos con filtros, detalle y flujo de
 ```bash
 # Requisitos: Node >= 21, pnpm >= 9
 
-pnpm install  # Builda automáticamente @shakers/shared
+pnpm install  # Buildea automáticamente @shakers/shared
 pnpm dev
 ```
 
