@@ -5,7 +5,7 @@
   "description": "Shakers - Full Stack Challenge Monorepo",
   "scripts": {
     "build": "pnpm -r build",
-    "dev": "pnpm --filter @shakers/shared build && pnpm -r --parallel dev",
+    "dev": "pnpm --filter @shakers/shared build && concurrently \"pnpm --filter @shakers/api dev\" \"pnpm --filter @shakers/web dev\"",
     "postinstall": "pnpm --filter @shakers/shared build",
     "lint": "eslint . --ext .ts,.tsx,.js,.jsx",
     "lint:fix": "eslint . --ext .ts,.tsx,.js,.jsx --fix",
@@ -22,6 +22,7 @@
     "@commitlint/config-conventional": "^19.6.0",
     "@typescript-eslint/eslint-plugin": "^8.21.0",
     "@typescript-eslint/parser": "^8.21.0",
+    "concurrently": "^9.1.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-import-resolver-typescript": "^3.7.0",

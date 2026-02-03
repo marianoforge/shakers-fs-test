@@ -9,10 +9,6 @@ Prueba técnica Full Stack: landing de proyectos con filtros, detalle y flujo de
 
 pnpm install  # Builda automáticamente @shakers/shared
 pnpm dev
-
-# Nota: Es normal ver errores de TypeScript del API durante los primeros segundos
-# mientras @shakers/shared se buildea. Desaparecen automáticamente.
-# si nose arregla solo vuelve a correr pnpm dev
 ```
 
 - **Web**: http://localhost:3000
@@ -108,7 +104,8 @@ pnpm test:cov         # Coverage report
 ## Scripts
 
 ```bash
-pnpm dev              # API + Web en paralelo
+pnpm dev              # API + Web en paralelo (rápido)
+pnpm dev:safe         # Build secuencial sin errores transitorios
 pnpm build            # Build de producción
 pnpm test             # Run backend tests
 pnpm test:watch       # Tests en watch mode
