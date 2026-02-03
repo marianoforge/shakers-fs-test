@@ -7,15 +7,27 @@ export async function getProjects(filter?: ProjectFilter): Promise<Project[]> {
 
   if (filter?.specialties?.length) {
     params['specialties[]'] = filter.specialties.map(String);
+    if (filter.specialtiesOp) {
+      params['specialtiesOp'] = filter.specialtiesOp;
+    }
   }
   if (filter?.skills?.length) {
     params['skills[]'] = filter.skills.map(String);
+    if (filter.skillsOp) {
+      params['skillsOp'] = filter.skillsOp;
+    }
   }
   if (filter?.industry?.length) {
     params['industry[]'] = filter.industry.map(String);
+    if (filter.industryOp) {
+      params['industryOp'] = filter.industryOp;
+    }
   }
   if (filter?.projectType?.length) {
     params['projectType[]'] = filter.projectType.map(String);
+    if (filter.projectTypeOp) {
+      params['projectTypeOp'] = filter.projectTypeOp;
+    }
   }
   if (filter?.order) {
     params['order'] = filter.order;

@@ -46,16 +46,30 @@ export function ProjectDescription({ description, goals }: ProjectDescriptionPro
           >
             ¿Cuáles son los objetivos y tareas a realizar?
           </Typography>
-          <Typography
+          <Box
+            component="ul"
             sx={{
-              color: '#555E5C',
-              fontSize: 14,
-              fontWeight: 400,
-              lineHeight: '20px',
+              m: 0,
+              pl: { xs: 0, sm: 2.5 },
+              listStyle: { xs: 'none', sm: 'disc' },
             }}
           >
-            {goals.join(' ')}
-          </Typography>
+            {goals.map((goal, index) => (
+              <Box
+                component="li"
+                key={index}
+                sx={{
+                  color: '#555E5C',
+                  fontSize: 14,
+                  fontWeight: 400,
+                  lineHeight: '20px',
+                  mb: 0.5,
+                }}
+              >
+                {goal}
+              </Box>
+            ))}
+          </Box>
         </Box>
       )}
     </Box>

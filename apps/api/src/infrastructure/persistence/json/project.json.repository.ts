@@ -24,27 +24,35 @@ export class ProjectJsonRepository implements ProjectRepositoryPort {
     let result = this.projects.filter((p) => p.status === 'PUBLISHED');
 
     if (filter?.specialties?.length) {
-      result = result.filter((project) =>
-        project.positions.some((position: Position) =>
-          position.specialties.some((s: number) => filter.specialties?.includes(s)),
-        ),
-      );
+      const op = filter.specialtiesOp ?? 'OR';
+      result = result.filter((project) => {
+        const projectSpecialties = project.positions.flatMap(
+          (position: Position) => position.specialties,
+        );
+        if (op === 'AND') {
+          return filter.specialties!.every((s) => projectSpecialties.includes(s));
+        }
+        return filter.specialties!.some((s) => projectSpecialties.includes(s));
+      });
     }
 
     if (filter?.skills?.length) {
-      result = result.filter((project) =>
-        project.positions.some((position: Position) =>
-          position.skills.some((s: number) => filter.skills?.includes(s)),
-        ),
-      );
+      const op = filter.skillsOp ?? 'OR';
+      result = result.filter((project) => {
+        const projectSkills = project.positions.flatMap((position: Position) => position.skills);
+        if (op === 'AND') {
+          return filter.skills!.every((s) => projectSkills.includes(s));
+        }
+        return filter.skills!.some((s) => projectSkills.includes(s));
+      });
     }
 
     if (filter?.industry?.length) {
-      result = result.filter((project) => filter.industry?.includes(project.organization.industry));
+      result = result.filter((project) => filter.industry!.includes(project.organization.industry));
     }
 
     if (filter?.projectType?.length) {
-      result = result.filter((project) => filter.projectType?.includes(project.category));
+      result = result.filter((project) => filter.projectType!.includes(project.category));
     }
 
     if (filter?.order === 'publishedAt_desc') {

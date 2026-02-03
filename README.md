@@ -1,154 +1,126 @@
-# Shakers - Full Stack Challenge
+# Shakers - Buscador de Proyectos
 
-Monorepo para la prueba técnica de Shakers: Landing de proyectos con buscador y filtros.
+Prueba técnica Full Stack: landing de proyectos con filtros, detalle y flujo de aplicación.
 
-## Stack Tecnológico
-
-- **Frontend**: Next.js 14+ con Material UI
-- **Backend**: NestJS 10+ con arquitectura hexagonal
-- **Monorepo**: pnpm workspaces
-- **Lenguaje**: TypeScript strict mode
-- **Validación**: Zod schemas compartidos
-
-## Estructura del Proyecto
-
-```
-shakers/
-├── apps/
-│   ├── api/          # NestJS backend
-│   └── web/          # Next.js frontend
-├── packages/
-│   └── shared/       # Types, DTOs, Zod schemas compartidos
-├── package.json
-├── pnpm-workspace.yaml
-├── tsconfig.base.json
-├── .eslintrc.cjs
-├── .prettierrc
-└── commitlint.config.js
-```
-
-## Requisitos
-
-- Node.js >= 20.0.0
-- pnpm >= 9.0.0
-
-## Inicio Rápido
+## Quick Start
 
 ```bash
-# 1. Instalar dependencias
+# Requisitos: Node >= 21, pnpm >= 9
+
 pnpm install
-
-# 2. Configurar variables de entorno
-cp apps/api/.env.example apps/api/.env
-
-# 3. Iniciar API (puerto 3001)
-pnpm --filter @shakers/api dev
-
-# 4. Iniciar Web (puerto 3000) - en otra terminal
-pnpm --filter @shakers/web dev
-
-# O iniciar ambos en paralelo
 pnpm dev
 ```
 
-### URLs
+- **Web**: http://localhost:3000
+- **API**: http://localhost:3001
 
-| Servicio     | URL                          |
-| ------------ | ---------------------------- |
-| API          | http://localhost:3001        |
-| Web          | http://localhost:3000        |
-| Health Check | http://localhost:3001/health |
+## Stack
 
-## Variables de Entorno
+| Capa     | Tech                                        |
+| -------- | ------------------------------------------- |
+| Frontend | Next.js 14 (App Router) + Material UI       |
+| Backend  | NestJS 10 + Arquitectura Hexagonal          |
+| Monorepo | pnpm workspaces                             |
+| Types    | TypeScript strict + Zod schemas compartidos |
 
-### API (`apps/api/.env`)
+## Estructura
 
-```env
-PORT=3001
-CORS_ORIGIN=http://localhost:3000
+```
+├── apps/
+│   ├── api/                 # NestJS
+│   │   ├── src/
+│   │   │   ├── domain/      # Puertos (interfaces)
+│   │   │   ├── application/ # Servicios
+│   │   │   └── infrastructure/
+│   │   │       ├── http/    # Controllers
+│   │   │       └── persistence/  # Repositorios JSON
+│   │   └── data/            # JSONs de proyectos y static data
+│   │
+│   └── web/                 # Next.js
+│       └── src/
+│           ├── app/         # Páginas (App Router)
+│           ├── components/  # UI components
+│           ├── hooks/       # Custom hooks (filters, projects, etc)
+│           └── lib/         # API client, utils
+│
+└── packages/
+    └── shared/              # Types + Zod schemas
 ```
 
-## Scripts Disponibles
+## Endpoints
+
+```
+GET  /health                    → Health check
+GET  /static-data               → Skills, specialties, industries, categories
+GET  /projects                  → Lista con filtros y ordenamiento
+GET  /projects/:id              → Detalle
+POST /projects/:id/applications → Aplicar (body: { positionId })
+DEL  /projects/:id/applications → Retirar candidatura
+```
+
+**Filtros disponibles** (query params):
+
+- `specialties[]`, `skills[]`, `industry[]`, `projectType[]`
+- `specialtiesOp`, `skillsOp`, etc. → `AND` | `OR` (default: OR)
+- `order` → `publishedAt_desc` | `publishedAt_asc`
+
+## Testing
 
 ```bash
-# Desarrollo
-pnpm dev                          # Inicia todos los servicios
-pnpm --filter @shakers/api dev    # Solo API
-pnpm --filter @shakers/web dev    # Solo Web
-
-# Build
-pnpm build                        # Construye todos los paquetes
-pnpm --filter @shakers/api build  # Solo API
-
-# Linting y formato
-pnpm lint                         # Ejecuta ESLint
-pnpm lint:fix                     # Corrige errores de ESLint
-pnpm format                       # Formatea código con Prettier
-pnpm format:check                 # Verifica formato
-
-# Type checking
-pnpm typecheck                    # Verifica tipos en todos los paquetes
+pnpm test             # Run all tests
+pnpm test:watch       # Watch mode
+pnpm test:cov         # Coverage report
 ```
 
-## Convención de Commits
+**Cobertura**: 34 tests pasando
 
-Este proyecto usa [Conventional Commits](https://www.conventionalcommits.org/):
+- `ApplicationsService`: apply, withdraw, state management
+- `ProjectJsonRepository`: filtros, operadores AND/OR, sorting
 
-```
-feat(api): add projects endpoint
-fix(web): resolve filter modal issue
-chore(deps): update dependencies
-```
+## Features
 
-### Scopes disponibles
+- [x] Listado de proyectos con cards
+- [x] Modal de filtros (especialidades, skills, industria, tipo)
+- [x] Operadores AND/OR por cada filtro
+- [x] Bloque de "Filtros aplicados" con posibilidad de remover
+- [x] Ordenamiento por fecha de publicación
+- [x] Detalle del proyecto completo
+- [x] Flujo aplicar/retirar candidatura con toast
+- [x] Animación de entrada (bounce desde izquierda)
+- [x] Diseño responsive (mobile + desktop)
+- [x] Tests unitarios en backend (34 tests)
 
-- `api` - Backend NestJS
-- `web` - Frontend Next.js
-- `shared` - Package compartido
-- `root` - Configuración raíz
-- `deps` - Dependencias
-- `config` - Configuración
+## Scripts
 
-## Arquitectura
-
-El proyecto sigue los principios de **arquitectura hexagonal** (ports & adapters):
-
-### Backend (NestJS)
-
-```
-apps/api/src/
-├── domain/           # Entidades y reglas de negocio
-├── application/      # Casos de uso
-├── infrastructure/   # Adaptadores (repositorios, controllers)
-└── shared/           # Utilidades compartidas
+```bash
+pnpm dev              # API + Web en paralelo
+pnpm build            # Build de producción
+pnpm test             # Run backend tests
+pnpm test:watch       # Tests en watch mode
+pnpm test:cov         # Tests con coverage
+pnpm lint             # ESLint
+pnpm format           # Prettier
+pnpm typecheck        # Type checking
 ```
 
-### Frontend (Next.js)
+## Decisiones técnicas
 
-```
-apps/web/src/
-├── app/              # App Router de Next.js
-├── components/       # Componentes React
-├── hooks/            # Custom hooks
-├── services/         # Servicios API
-└── types/            # Tipos locales
-```
+**¿Por qué arquitectura hexagonal en el backend?**
+Separa la lógica de negocio de los detalles de infraestructura. Facilita testear y cambiar el origen de datos (hoy JSON, mañana MongoDB) sin tocar la lógica.
 
-## Funcionalidades
+**¿Por qué pnpm workspaces?**
+Manejo limpio de dependencias compartidas. El package `@shakers/shared` exporta tipos y schemas que usan tanto el frontend como el backend.
 
-### Endpoints API
+**¿Por qué Zod?**
+Validación en runtime + inferencia de tipos. Un solo schema genera el tipo TypeScript y valida los datos.
 
-1. `GET /static-data` - Datos estáticos (skills, specialties, industries, etc.)
-2. `GET /projects` - Listado de proyectos con filtros y ordenamiento
-3. `GET /projects/:id` - Detalle de proyecto
-4. `POST /projects/:id/applications` - Aplicar a proyecto
-5. `DELETE /projects/:id/applications` - Retirar candidatura
+**¿Por qué MUI?**
+Componentes accesibles out-of-the-box. El `sx` prop permite colocar estilos con lógica responsive sin saltar entre archivos.
 
-### Pantallas Frontend
+## Commits
 
-1. `/projects` - Landing con listado, búsqueda y filtros
-2. `/projects/[id]` - Detalle del proyecto con opción de aplicar
+Conventional Commits: `feat(web): add filters modal`, `fix(api): handle empty results`
 
-## Licencia
+---
 
-Prueba técnica - Uso privado
+_Prueba técnica para Shakers_

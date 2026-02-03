@@ -205,10 +205,7 @@ export function FiltersModal({
       PaperProps={{
         sx: {
           borderRadius: isMobile ? 0 : '6px',
-          px: 2,
-          pt: 5,
-          pb: 5,
-          ...(isMobile ? {} : { p: 5 }),
+          ...(isMobile ? { px: 2, pt: 5, pb: 5 } : { p: 5 }),
           position: 'relative',
           overflow: 'auto',
         },

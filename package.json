@@ -11,7 +11,10 @@
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md}\"",
     "prepare": "husky",
-    "typecheck": "pnpm -r typecheck"
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm --filter @shakers/api test",
+    "test:watch": "pnpm --filter @shakers/api test:watch",
+    "test:cov": "pnpm --filter @shakers/api test:cov"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.6.1",
@@ -29,7 +32,7 @@
   },
   "packageManager": "pnpm@10.28.2",
   "engines": {
-    "node": ">=20.0.0",
+    "node": ">=21.0.0",
     "pnpm": ">=9.0.0"
   }
 }

@@ -37,7 +37,7 @@ export class ApplicationsService {
     this.applications.forEach((key) => {
       if (key.startsWith(prefix)) {
         const parts = key.split(':');
-        if (parts[1]) {
+        if (parts.length > 1 && parts[1] !== undefined) {
           const positionId = parseInt(parts[1], 10);
           positionIds.push(positionId);
         }

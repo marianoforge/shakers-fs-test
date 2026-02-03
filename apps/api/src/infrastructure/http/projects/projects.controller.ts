@@ -20,6 +20,10 @@ interface GetProjectsQueryDto {
   industry?: string | string[];
   projectType?: string | string[];
   order?: 'publishedAt_desc' | 'publishedAt_asc';
+  specialtiesOp?: 'AND' | 'OR';
+  skillsOp?: 'AND' | 'OR';
+  industryOp?: 'AND' | 'OR';
+  projectTypeOp?: 'AND' | 'OR';
 }
 
 interface ApplyDto {
@@ -39,18 +43,22 @@ export class ProjectsController {
 
     if (query.specialties) {
       filter.specialties = this.parseArrayParam(query.specialties);
+      filter.specialtiesOp = query.specialtiesOp ?? 'OR';
     }
 
     if (query.skills) {
       filter.skills = this.parseArrayParam(query.skills);
+      filter.skillsOp = query.skillsOp ?? 'OR';
     }
 
     if (query.industry) {
       filter.industry = this.parseArrayParam(query.industry);
+      filter.industryOp = query.industryOp ?? 'OR';
     }
 
     if (query.projectType) {
       filter.projectType = this.parseArrayParam(query.projectType);
+      filter.projectTypeOp = query.projectTypeOp ?? 'OR';
     }
 
     if (query.order) {
@@ -58,17 +66,6 @@ export class ProjectsController {
     }
 
     return this.projectsService.findAll(filter);
-  }
-
-  @Get(':id')
-  async findById(@Param('id', ParseIntPipe) id: number): Promise<Project> {
-    const project = await this.projectsService.findById(id);
-
-    if (!project) {
-      throw new NotFoundException(`Project with id ${id} not found`);
-    }
-
-    return project;
   }
 
   @Get(':id/applications')
@@ -121,6 +118,11 @@ export class ProjectsController {
       throw new NotFoundException(`Project with id ${id} not found`);
     }
 
+    const position = project.positions.find((p) => p.id === body.positionId);
+    if (!position) {
+      throw new NotFoundException(`Position with id ${body.positionId} not found`);
+    }
+
     const withdrawn = await this.applicationsService.withdraw(id, body.positionId);
 
     if (!withdrawn) {
@@ -128,6 +130,17 @@ export class ProjectsController {
     }
 
     return { success: true, message: 'Candidatura retirada con éxito' };
+  }
+
+  @Get(':id')
+  async findById(@Param('id', ParseIntPipe) id: number): Promise<Project> {
+    const project = await this.projectsService.findById(id);
+
+    if (!project) {
+      throw new NotFoundException(`Project with id ${id} not found`);
+    }
+
+    return project;
   }
 
   private parseArrayParam(param: string | string[]): number[] {
